@@ -1,7 +1,8 @@
 
 # Blazor Typescript Interop
-![Test](./readme/tsinterop.svg){ width=35%}
-This is an article on Blazor Typescript Interop. 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Test](./readme/tsinterop.png)
+
+&nbsp;&nbsp;&nbsp;&nbsp;This is an article on Blazor Typescript Interop. 
 An elegant way to interface your Blazor C# with the browsers Javascript API.
 Discussion will contain a brief overview on the technology 
 with a focus on why, when and how to use it.
@@ -20,7 +21,7 @@ Typescript transpiles to Javascript, so references to Javascipt going forward is
  ![Test](./readme/interop.png)
 &nbsp;&nbsp;&nbsp;&nbsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
-The browser executes Wasm code oneway requiring Javascript interop to communicate back to the browser functions. Hence Blazor C# needs Javascipt interop.
+The browser executes Wasm code oneway requiring Javascript interop to communicate back to the browser function. Hence Blazor C# needs Javascipt interop.
 Existing Blazor .NET libraries such as the C# WebSocket class are Javascript interop wrappers.
 
 
