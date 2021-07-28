@@ -5,6 +5,17 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BazorTSInterop", "BazorTSInterop.csproj", "{EF7CB628-F4D2-4727-923A-7E28BC01BEB6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readme", "readme", "{56FD2724-F92E-4B33-B813-8D42E373C4FE}"
+	ProjectSection(SolutionItems) = preProject
+		readme\blazor.png = readme\blazor.png
+		readme\interop.png = readme\interop.png
+		readme\tscircle.png = readme\tscircle.png
+		readme\tsinterop.svg = readme\tsinterop.svg
+		readme\VS1.png = readme\VS1.png
+		readme\VS2.png = readme\VS2.png
+		readme\VS3.png = readme\VS3.png
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
