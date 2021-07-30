@@ -1,16 +1,10 @@
 ﻿@page "/"
 @inject IJSRuntime JS
-
 <h1>Hello, Interop!</h1>
-
-<hr />
-@Message
-<hr />
-
-<h4>
-    JS Interop
-</h4>
+<hr />@Message<hr />
+<h4>JS Interop</h4>
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
 <hr>
 @code {
     string Message { get; set; } = "";
@@ -19,6 +13,13 @@
     {
         string answer = await JS.InvokeAsync<string>("prompt", "say what?");
         Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void ScriptPrompt()
+    {
+        string answer = await JS.InvokeAsync<string>("ScriptPrompt", "ScriptPrompt say what?");
+        Message = "Script Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
 }

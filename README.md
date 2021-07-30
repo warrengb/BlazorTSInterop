@@ -3,11 +3,10 @@
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Test](./readme/tsinterop.png)
 
 &nbsp;&nbsp;&nbsp;&nbsp;This is an article on Blazor Typescript Interop. 
-An elegant way to interface your Blazor C# with the browsers Javascript API.
+An elegant way to interface your Blazor C# with the browsers Javascript API and libraries.
 Discussion will contain a brief overview on the technologies and variations of how to interop Blazor with Typescript. 
 An implementation walkthrough will further explain the concept by code example on GitHub.
-Walkthrough starts off with plain old Javascript, then progresses to Typescript and Typescript utilizing NPM. 
-NPM has a wealth of Javascript libraries Blazor can consume.   
+Walkthrough starts off with plain old Javascript, then progresses to Typescript and Typescript utilizing NPM library.    
 
 ***     
 
@@ -39,16 +38,20 @@ Lets get started.
 ###### To start off we will just create a new blazor app.
 
 
-1.  Create new Blazor WebAssembly App:
+> Create new Blazor WebAssembly App.
+> 
  ![Test](./readme/vs0.png)
 
-2.  Name it BlazerTSInterop in directory of your choice:
+>  Name it BlazerTSInterop in directory of your choice.
+>  
  ![Test](./readme/vs1.png)
 
-3.  Use .NET 5.0 client only, No secutiry and no PWA:
+>  Use .NET 5.0 client only, No secutiry and no PWA.
+>  
  ![Test](./readme/vs2.png)
 
-4.  CTRL+F5 build and run in hot reload mode. 
+>  CTRL+F5 build and run in hot reload mode.
+
  ![Test](./readme/vs3.png)
 
 ---
@@ -63,7 +66,8 @@ This demo will only use the home page.
 ### Implement Javascript Interop
 ###### Before we get to Typescript, let's see how Javascript interops.
 
-<b>1.  Call a browser Javascript API method.</b><br> Replace all Index.razor code with following code: 
+<b>1.  Call a browser Javascript API method.</b><br> 
+> Replace all of Index.razor contents with following code snippets respectfully. 
 ```html
 @page "/"
 @inject IJSRuntime JS
@@ -92,13 +96,67 @@ This demo will only use the home page.
     }
 }
 ```
-Save in hot reload mode and test:
+> Save in hot reload mode and test.
 
  ![Test](./readme/vs4.png)
 ---
 
-<ul>
-Step 1 demonstrates calling a browser Javascript API method.
-</ul>  
+<b>2. Call an Javascript method loaded as static web asset.</b><br>
+> Create new Javascript file <br>
+> Create new src folder for Javascript and Typescript files.<br>
+> Create new 'wwwroot/src/script.js' file.
+ 
+![Test](./readme/vs5.png)
 
----  
+> Copy code to 'script.js'.
+```javascript
+function ScriptPrompt(message){
+    return prompt(message);
+}
+```
+> Add 'script.js' as static asset in 'Index.html' after 'webassemly.js'.
+
+
+```html
+<body>
+...
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="src/script.js"></script>
+...
+</body>
+```
+> Replace all of Index.razor contents with following code snippets respectfully to add ScriptPrompt button and method. 
+
+```html
+@page "/"
+@inject IJSRuntime JS
+<h1>Hello, Interop!</h1>
+<hr />@Message<hr />
+<h4>JS Interop</h4>
+<button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
+<hr>
+```
+```c#
+@code {
+    string Message { get; set; } = "";
+
+    async void Prompt()
+    {
+        string answer = await JS.InvokeAsync<string>("prompt", "say what?");
+        Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void ScriptPrompt()
+    {
+        string answer = await JS.InvokeAsync<string>("ScriptPrompt", "ScriptPrompt say what?");
+        Message = "Script Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+}
+```
+
+> Run to test static custom Javascipt method  ScriptPrompt.
+> 
+![Test](./readme/vs6.png)
