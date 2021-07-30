@@ -6,7 +6,7 @@
 An elegant way to interface your Blazor C# with the browsers Javascript API.
 Discussion will contain a brief overview on the technologies and variations of how to interop Blazor with Typescript. 
 An implementation walkthrough will further explain the concept by code example on GitHub.
-Coding starts off with plain old Javascript and progresses to Typescript and Typescript utilizing NPM. 
+Walkthrough starts off with plain old Javascript, then progresses to Typescript and Typescript utilizing NPM. 
 NPM has a wealth of Javascript libraries Blazor can consume.   
 
 ***     
@@ -48,7 +48,7 @@ Lets get started.
 3.  Use .NET 5.0 client only, No secutiry and no PWA:
  ![Test](./readme/vs2.png)
 
-4.  Build and Run 
+4.  CTRL+F5 build and run in hot reload mode. 
  ![Test](./readme/vs3.png)
 
 ---
@@ -62,3 +62,43 @@ This demo will only use the home page.
 
 ### Implement Javascript Interop
 ###### Before we get to Typescript, let's see how Javascript interops.
+
+<b>1.  Call a browser Javascript API method.</b><br> Replace all Index.razor code with following code: 
+```html
+@page "/"
+@inject IJSRuntime JS
+
+<h1>Hello, Interop!</h1>
+
+<hr />
+@Message
+<hr />
+
+<h4>
+    JS Interop
+</h4>
+<button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
+<hr>
+```
+```c#
+@code {
+    string Message { get; set; } = "";
+
+    async void Prompt()
+    {
+        string answer = await JS.InvokeAsync<string>("prompt", "say what?");
+        Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+}
+```
+Save in hot reload mode and test:
+
+ ![Test](./readme/vs4.png)
+---
+
+<ul>
+Step 1 demonstrates calling a browser Javascript API method.
+</ul>  
+
+---  
