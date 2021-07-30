@@ -7,7 +7,9 @@ An elegant way to interface your Blazor C# with the browsers Javascript API.
 Discussion will contain a brief overview on the technologies and variations of how to interop Blazor with Typescript. 
 An implementation walkthrough will further explain the concept by code example on GitHub.
 Coding starts off with plain old Javascript and progresses to Typescript and Typescript utilizing NPM. 
-NPM has a wealth of Javascript libraries Blazor can consume.        
+NPM has a wealth of Javascript libraries Blazor can consume.   
+
+***     
 
 ![Test](./readme/blazor.png)
 &nbsp;&nbsp;&nbsp;&nbsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
@@ -25,4 +27,38 @@ Data elements and procedures can be interchanged between the two languages. Blaz
 The browser executes Wasm code oneway requiring Javascript interop to communicate back to the browser function. Hence Blazor C# needs Javascipt interop.
 Existing Blazor .NET libraries such as the C# WebSocket class are Javascript interop wrappers.
 
+---
 
+<ul>
+Lets get started.
+</ul>  
+
+---
+
+### Create Blazor Project
+###### To start off we will just create a new blazor app.
+
+
+1.  Create new Blazor WebAssembly App:
+ ![Test](./readme/vs0.png)
+
+2.  Name it BlazerTSInterop in directory of your choice:
+ ![Test](./readme/vs1.png)
+
+3.  Use .NET 5.0 client only, No secutiry and no PWA:
+ ![Test](./readme/vs2.png)
+
+4.  Build and Run 
+ ![Test](./readme/vs3.png)
+
+---
+
+<ul>
+Ignore Counter and Fetch Data pages that come with the template.
+This demo will only use the home page.
+</ul>  
+
+---
+
+### Implement Javascript Interop
+###### Before we get to Typescript, let's see how Javascript interops.

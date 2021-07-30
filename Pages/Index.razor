@@ -1,7 +1,24 @@
 ﻿@page "/"
+@inject IJSRuntime JS
 
-<h1>Hello, world!</h1>
+<h1>Hello, Interop!</h1>
 
-Welcome to your new app.
+<hr />
+@Message
+<hr />
 
-<SurveyPrompt Title="How is Blazor working for you?" />
+<h4>
+    JS Interop
+</h4>
+<button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
+<hr>
+@code {
+    string Message { get; set; } = "";
+
+    async void Prompt()
+    {
+        string answer = await JS.InvokeAsync<string>("prompt", "say what?");
+        Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+}
