@@ -39,7 +39,7 @@ Lets get started.
 
 ---
 
-### Create Blazor Project
+### Part 1. Create Blazor Project
 ###### To start off we will just create a new blazor app.
 
 
@@ -68,7 +68,7 @@ This demo will only use the home page.
 
 ---
 
-### Implement JavaScript Interop
+### Part 2. Implement JavaScript Interop
 ###### Before we get to Typescript, let's see how JavaScript interops.
 
 <b>1.  Call a browser JavaScript API method.</b><br> 
@@ -247,5 +247,13 @@ export function ModulAlert(message) {
         StateHasChanged();
     }
 }
-
 ```
+
+>Isolated models support the IAsyncDisposable with the DisposeAsync to cleanup module resources when no longer needed.<br>
+>Module is loaded after first render by the OnAfterRenderAsync method.<br>
+>ModulePrompt demonstrates calling the static method ScriptPrompt.<br>
+>ModuleAlert demonstrates calling another exported method from the same module.<br>
+
+>Build and run.
+>
+![Test](./readme/vs8.png)
