@@ -1,10 +1,11 @@
 ﻿export function ScriptPrompt(message){
     return prompt(message);
 }
-export function ScriptModulePrompt(message) {
+export function ModulePrompt(message) {
     return ScriptPrompt(message);
 }
 
-export function ScriptModuleAlert(message) {
+export function ModulAlert(message) {
     alert(message);
 }
+

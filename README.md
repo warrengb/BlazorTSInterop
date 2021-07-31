@@ -159,6 +159,19 @@ function ScriptPrompt(message){
 > 
 ![Test](./readme/vs6.png)
 
-<b>3. Call isolated JavaScript method.</b><br>
-> Create new JavaScript file <br>
-> Create new src folder for JavaScript and Typescript files.<br>
+<b>3. Call isolated JavaScript module method.</b>
+
+> Create new 'wwwroot/src/script.module.js' JavaScript file.
+
+![Test](./readme/vs7.png)
+
+> Copy code to 'script.module.js'.
+```JavaScript
+export function ScriptModulePrompt(message) {
+    return ScriptPrompt(message);
+}
+
+export function ScriptModuleAlert(message) {
+    alert(message);
+}
+```

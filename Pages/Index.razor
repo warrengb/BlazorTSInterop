@@ -2,16 +2,17 @@
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 <h1>Hello, Interop!</h1>
+<h4>JS Interop</h4>
 <hr />@Message
 <hr />
-<h4>JS Interop</h4>
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
 <button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
-<button class="btn btn-primary" @onclick="@ScriptModelPrompt">Script Model Prompt</button>
-<button class="btn btn-primary" @onclick="@ScriptModelAlert">Script Model Alert</button>
+<button class="btn btn-primary" @onclick="@ModulelPrompt">Module Prompt</button>
+<button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button>
 <hr>
 @code {
     private IJSObjectReference module;
+    string Message { get; set; } = "";
 
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
@@ -29,19 +30,18 @@
         }
     }
 
-    async void ScriptModelPrompt()
+    async void ModulelAlert()
     {
-        string answer = await JS.InvokeAsync<string>("ScriptPrompt", "Script Module Prompt say what?");
-        Message = "Script Module Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        await module.InvokeVoidAsync("ModulAlert", "Modulel Alert");
+
+    }
+
+    async void ModulelPrompt()
+    {
+        string answer = await module.InvokeAsync<string>("ModulePrompt", "Module Prompt say what?");
+        Message = "Module Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
-
-    async void ScriptModelAlert()
-    {
-        await module.InvokeVoidAsync("ScriptPrompt");
-    }
-
-    string Message { get; set; } = "";
 
     async void Prompt()
     {
