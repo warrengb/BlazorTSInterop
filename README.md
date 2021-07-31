@@ -7,7 +7,7 @@ An elegant way to interface your Blazor C# WebAssembly (Wasm) with the browsers 
 Wasm can only communicate with the browser JavaScript API. N ot able to reach outside the browser’s security sandbox.
 Calling JavaScript from C# and vice-versa requires some thought. Leveraging TypeScript will guide better interop interface design.
 Discussion will contain a brief overview on the technology and variations of how to interop Blazor with Typescript. 
-An implementation walkthrough will further explain the concept by code example available on GitHub.
+An implementation walkthrough will further explain by code example available on GitHub.
 Walkthrough starts off with plain old JavaScript, then progresses to Typescript and Typescript utilizing NPM library.
 For more information on Blazor Interop see 
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
@@ -29,7 +29,7 @@ Using Typescript benefits code design such as structural design patterns like fa
 &nbsp;&nbsp;&nbsp;&nbsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
 The browser executes Wasm code oneway requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# needs Javascipt interop.
-Existing Blazor .NET libraries such as the C# WebSocket class are JavaScript interop wrappers.
+Existing Blazor .NET libraries for the broser, such as the C# WebSocket class, are JavaScript interop wrappers.
 
 ---
 

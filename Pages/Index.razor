@@ -1,12 +1,46 @@
 ﻿@page "/"
 @inject IJSRuntime JS
+@implements IAsyncDisposable
 <h1>Hello, Interop!</h1>
-<hr />@Message<hr />
+<hr />@Message
+<hr />
 <h4>JS Interop</h4>
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
 <button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptModelPrompt">Script Model Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptModelAlert">Script Model Alert</button>
 <hr>
 @code {
+    private IJSObjectReference module;
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        if (module is not null)
+        {
+            await module.DisposeAsync();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js");
+        }
+    }
+
+    async void ScriptModelPrompt()
+    {
+        string answer = await JS.InvokeAsync<string>("ScriptPrompt", "Script Module Prompt say what?");
+        Message = "Script Module Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void ScriptModelAlert()
+    {
+        await module.InvokeVoidAsync("ScriptPrompt");
+    }
+
     string Message { get; set; } = "";
 
     async void Prompt()
