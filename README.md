@@ -257,4 +257,3 @@ export function ModulAlert(message) {
 >Build and run.
 >
 ![ScreenShot](./readme/vs8.png)
-![ScreenShot](./readme/tscircle.png)
