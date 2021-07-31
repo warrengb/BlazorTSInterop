@@ -112,8 +112,12 @@ function ScriptPrompt(message){
     return prompt(message);
 }
 ```
-> Add 'script.js' as static asset in 'Index.html' after 'webassemly.js'.
 
+> Static assets serve one global entry point defined by the method in file.
+> Other methods and data within file are private.
+> ScriptPrompt method will be callable from other JavaScript modules including isolated modules.
+
+> Add 'script.js' as static asset in 'Index.html' after 'webassemly.js'.
 
 ```html
 <body>
@@ -154,6 +158,8 @@ function ScriptPrompt(message){
     }
 }
 ```
+> Prompt demonstrates calling a browser API method.<br>
+> ScriptPrompt demonstrates calling a static JavaScript method.
 
 > Run to test static custom JavaScript method  ScriptPrompt.
 > 
@@ -166,12 +172,80 @@ function ScriptPrompt(message){
 ![Test](./readme/vs7.png)
 
 > Copy code to 'script.module.js'.
+> ModulePrompt demonstrates calling the statically loaded JavaScript method ScriptPrompt.
+> ModulAlert demonstrates additional module method that calls browser's alert.
 ```JavaScript
-export function ScriptModulePrompt(message) {
+export function ModulePrompt(message) {
     return ScriptPrompt(message);
 }
 
-export function ScriptModuleAlert(message) {
+export function ModulAlert(message) {
     alert(message);
 }
+```
+
+> Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
+```html
+@page "/"
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+<h1>Hello, Interop!</h1>
+<h4>JS Interop</h4>
+<hr />@Message
+<hr />
+<button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
+<button class="btn btn-primary" @onclick="@ModulelPrompt">Module Prompt</button>
+<button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button>
+<hr>
+```
+
+```c#
+@code {
+    private IJSObjectReference module;
+    string Message { get; set; } = "";
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        if (module is not null)
+        {
+            await module.DisposeAsync();
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js");
+        }
+    }
+
+    async void ModulelAlert()
+    {
+        await module.InvokeVoidAsync("ModulAlert", "Modulel Alert");
+    }
+
+    async void ModulelPrompt()
+    {
+        string answer = await module.InvokeAsync<string>("ModulePrompt", "Module Prompt say what?");
+        Message = "Module Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void Prompt()
+    {
+        string answer = await JS.InvokeAsync<string>("prompt", "say what?");
+        Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void ScriptPrompt()
+    {
+        string answer = await JS.InvokeAsync<string>("ScriptPrompt", "ScriptPrompt say what?");
+        Message = "Script Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+}
+
 ```
