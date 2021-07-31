@@ -255,5 +255,6 @@ export function ModulAlert(message) {
 >ModuleAlert demonstrates calling another exported method from the same module.<br>
 
 >Build and run.
->
+>TEST 5
+
 ![ScreenShot](./readme/vs8.png)
