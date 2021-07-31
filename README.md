@@ -1,6 +1,6 @@
 
 # Blazor Typescript Interop
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![Test](./readme/tsinterop.png)
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](./readme/tsinterop.png)
 
 &nbsp;&nbsp;&nbsp;&nbsp;This is an article on Blazor Typescript Interop. 
 An elegant way to interface your Blazor C# WebAssembly (Wasm) with the browsers JavaScript API and libraries.
@@ -15,17 +15,17 @@ For more information on Blazor Interop see
 
 ***     
 
-![Test](./readme/blazor.png)
+![ScreenShot](./readme/blazor.png)
 &nbsp;&nbsp;&nbsp;&nbsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
 Wasm coded in C#. Blazor is an attractive alternative to Angular, React, Vue and other JavaScript SPA website architectures for the .NET developer.
 Blazor MAUI, a continuation of Xamarin with Blazor webview is another great addition to the .NET stack that comlpletes a .NET developer ecosystem for device and browser applications.
 
-![Test](./readme/tscircle.png)
+![ScreenShot](./readme/tscircle.png)
 **Typescript** is a superset of JavaScript for application-scale development featuring strong types and geared for object oriented programming.
 Typescript transpiles to JavaScript, so references to Javascipt going forward is either plain old JavaScript or the result of transpiled Typescript to JavaScript consumable by the browser.
 Using Typescript benefits code design such as structural design patterns like facades, adapters and bridges. 
 
- ![Test](./readme/interop.png)
+ ![ScreenShot](./readme/interop.png)
 &nbsp;&nbsp;&nbsp;&nbsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
 The browser executes Wasm code oneway requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# needs Javascipt interop.
@@ -45,19 +45,19 @@ Lets get started.
 
 > Create new Blazor WebAssembly App.
 > 
- ![Test](./readme/vs0.png)
+ ![ScreenShot](./readme/vs0.png)
 
 >  Name it BlazerTSInterop in directory of your choice.
 >  
- ![Test](./readme/vs1.png)
+ ![ScreenShot](./readme/vs1.png)
 
 >  Use .NET 5.0 client only, No secutiry and no PWA.
 >  
- ![Test](./readme/vs2.png)
+ ![ScreenShot](./readme/vs2.png)
 
 >  CTRL+F5 build and run in hot reload mode.
 
- ![Test](./readme/vs3.png)
+ ![ScreenShot](./readme/vs3.png)
 
 ---
 
@@ -94,9 +94,9 @@ This demo will only use the home page.
     }
 }
 ```
-> Save in hot reload mode and test.
+> Save in hot reload mode and ScreenShot.
 
- ![Test](./readme/vs4.png)
+ ![ScreenShot](./readme/vs4.png)
 ---
 
 <b>2. Call JavaScript method loaded as static web asset.</b><br>
@@ -104,7 +104,7 @@ This demo will only use the home page.
 > Create new src folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
  
-![Test](./readme/vs5.png)
+![ScreenShot](./readme/vs5.png)
 
 > Copy code to 'script.js'.
 ```JavaScript
@@ -161,15 +161,15 @@ function ScriptPrompt(message){
 > Prompt demonstrates calling a browser API method.<br>
 > ScriptPrompt demonstrates calling a static JavaScript method.
 
-> Run to test static custom JavaScript method  ScriptPrompt.
+> Run to ScreenShot static custom JavaScript method  ScriptPrompt.
 > 
-![Test](./readme/vs6.png)
+![ScreenShot](./readme/vs6.png)
 
 <b>3. Call isolated JavaScript module method.</b>
 
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
-![Test](./readme/vs7.png)
+![ScreenShot](./readme/vs7.png)
 
 > Copy code to 'script.module.js'.
 > ModulePrompt demonstrates calling the statically loaded JavaScript method ScriptPrompt.
@@ -256,4 +256,4 @@ export function ModulAlert(message) {
 
 >Build and run.
 >
-![Test](./readme/vs8.png)
+![ScreenShot](./readme/vs8.png)
