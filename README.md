@@ -11,7 +11,15 @@ An implementation walkthrough will further explain by code example available on 
 Walkthrough starts off with plain old JavaScript, then progresses to Typescript and Typescript utilizing NPM library.
 For more information on Blazor Interop see 
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
-    
+  
+***     
+#### Table of Contents
+1. [Create Blazor Project](#1)<br>
+2. [Implement JavaScript Interop](#2)<br>
+    1. [Call JavaScript Browser API](#2.1)<br>
+    2. [Call static JavaScript](#2.2)
+    3. [Call isolated JavaScript](#2.3)
+3. [Implement TypeScript Interop](#3)<br>
 
 ***     
 
@@ -39,7 +47,7 @@ Lets get started.
 
 ---
 
-### Part 1. Create Blazor Project
+## Part 1 Create Blazor Project<a name="1"></a>
 ###### To start off we will just create a new blazor app.
 
 
@@ -62,16 +70,19 @@ Lets get started.
 ---
 
 <ul>
+<b>Summary</b><br>
+A project ready to demontrate JavaScript interop walkthrough has been created.<br>
 Ignore Counter and Fetch Data pages that come with the template.
-This demo will only use the home page.
+This demo will only use the home page.<br>
 </ul>  
 
 ---
 
-### Part 2. Implement JavaScript Interop
+### Part 2. Implement JavaScript Interop<a name="2"></a>
 ###### Before we get to Typescript, let's see how JavaScript interops.
 
-<b>1.  Call a browser JavaScript API method.</b><br> 
+<b>1. Call JavaScript Browser API</b><a name="2.1"></a>
+<br> 
 > Replace all of Index.razor contents with following code snippets respectfully. 
 ```html
 @page "/"
@@ -100,7 +111,8 @@ This demo will only use the home page.
 
 ---
 
-<b>2. Call JavaScript method loaded as static web asset.</b><br>
+<b>2. Call static JavaScript</b><a name="2.2"></a>
+<br>
 > Create new JavaScript file <br>
 > Create new src folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
@@ -166,7 +178,7 @@ function ScriptPrompt(message){
  
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
 
-<b>3. Call isolated JavaScript module method.</b>
+<b>3. Call isolated JavaScript</b><a name="2.3"></a>
 
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
@@ -259,3 +271,15 @@ export function ModulAlert(message) {
 >Build and run.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image8.png)
+
+---
+
+<ul>
+<b>Summary</b><br> 
+Section Part 2 covers JavaScript static and module interop. A precursor relevant to the next section Part 3 on TypeScript interop.
+</ul>  
+
+---
+
+### Part 3. Implement TypeScript Interop<a name="3"></a>
+###### Let's proced to TypeScript interop.
