@@ -94,9 +94,10 @@ This demo will only use the home page.
     }
 }
 ```
-> Save in hot reload mode and ScreenShot.
+> Save to run in hot reload mode and test.
 
-![ScreenShot](readme/image4.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image4.png)
+
 ---
 
 <b>2. Call JavaScript method loaded as static web asset.</b><br>
