@@ -45,19 +45,19 @@ Lets get started.
 
 > Create new Blazor WebAssembly App.
 > 
-![ScreenShot](readme/vs0.png)
+![ScreenShot](readme/image0.png)
 
 >  Name it BlazerTSInterop in directory of your choice.
 >  
-![ScreenShot](readme/vs1.png)
+![ScreenShot](readme/image1.png)
 
 >  Use .NET 5.0 client only, No secutiry and no PWA.
 >  
-![ScreenShot](readme/vs2.png)
+![ScreenShot](readme/image2.png)
 
 >  CTRL+F5 build and run in hot reload mode.
 
-![ScreenShot](readme/vs3.png)
+![ScreenShot](readme/image3.png)
 
 ---
 
@@ -96,7 +96,7 @@ This demo will only use the home page.
 ```
 > Save in hot reload mode and ScreenShot.
 
-![ScreenShot](readme/vs4.png)
+![ScreenShot](readme/image4.png)
 ---
 
 <b>2. Call JavaScript method loaded as static web asset.</b><br>
@@ -104,7 +104,7 @@ This demo will only use the home page.
 > Create new src folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
  
-![ScreenShot](readme/vs5.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image5.png)
 
 > Copy code to 'script.js'.
 ```JavaScript
@@ -161,15 +161,15 @@ function ScriptPrompt(message){
 > Prompt demonstrates calling a browser API method.<br>
 > ScriptPrompt demonstrates calling a static JavaScript method.
 
-> Run to ScreenShot static custom JavaScript method  ScriptPrompt.
-> 
-![ScreenShot](readme/vs6.png)
+>Run to ScreenShot static custom JavaScript method  ScriptPrompt.
+ 
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
 
 <b>3. Call isolated JavaScript module method.</b>
 
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
-![ScreenShot](readme/vs7.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image7.png)
 
 > Copy code to 'script.module.js'.
 > ModulePrompt demonstrates calling the statically loaded JavaScript method ScriptPrompt.
@@ -256,5 +256,4 @@ export function ModulAlert(message) {
 
 >Build and run.
 
-![ScreenShot](readme/image1.png)
-![ScreenShot](readme/image2.png)
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image8.png)
