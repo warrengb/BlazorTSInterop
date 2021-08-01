@@ -173,8 +173,7 @@ function ScriptPrompt(message){
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image7.png)
 
 > Copy code to 'script.module.js'.
-> ModulePrompt demonstrates calling the statically loaded JavaScript method ScriptPrompt.
-> ModulAlert demonstrates additional module method that calls browser's alert.
+
 ```JavaScript
 export function ModulePrompt(message) {
     return ScriptPrompt(message);
@@ -184,6 +183,8 @@ export function ModulAlert(message) {
     alert(message);
 }
 ```
+> ModulePrompt demonstrates calling the statically loaded JavaScript method ScriptPrompt.<br>
+> ModulAlert demonstrates additional module method that calls browser's alert.
 
 > Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
 ```html
