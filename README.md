@@ -19,7 +19,8 @@ For more information on Blazor Interop see
     1. [Call JavaScript Browser API](#2.1)<br>
     2. [Call static JavaScript](#2.2)
     3. [Call isolated JavaScript](#2.3)
-3. [Implement TypeScript Interop](#3)<br>
+3. [Debugging JavaScript](#3)<br>
+4. [Implement TypeScript Interop](#4)<br>
 
 ***     
 
@@ -130,8 +131,10 @@ function ScriptAlert(message) {
 }
 ```
 
-> Methods ScriptPrompt and ScriptAlert will be loaded globally.<br>
-> Visible to other JavaScript modules including isolated modules.
+> ScriptPrompt and ScriptAlert will be statically loaded and global.<br>
+> Accessible to other JavaScript modules including isolated modules.<br>
+>> Notice the script methods call the browser API prompt and alert respectfully.
+
 
 > Add 'script.js' as static asset in 'Index.html' after 'webassemly.js'.
 
@@ -181,9 +184,9 @@ function ScriptAlert(message) {
 }
 ```
 > Prompt demonstrates calling a browser API method.<br>
-> ScriptPrompt demonstrates calling a static JavaScript method.
+> ScriptPrompt and  ScriptAlert demonstrate static JavaScript methods.
 
->Run to test JavaScript sript methods ScriptPrompt and ScriptAlert.
+>Run and test.
  
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
 
@@ -201,11 +204,13 @@ export function ModulePrompt(message) {
 }
 
 export function ModulAlert(message) {
-    alert(message);
+    ScriptAlert(message);
 }
 ```
-> ModulePrompt demonstrates calling the statically loaded JavaScript method ScriptPrompt.<br>
-> ModulAlert demonstrates additional module method that calls browser's alert.
+> Module methods demonstrates calling global script methods.<br>
+> > Note the 'export' method prefix.<br>
+> > This is ES module syntax to mark code as importable.<br>
+> > Not used or recognized by inherently global embedded scripts. 
 
 > Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
 ```html
@@ -213,34 +218,35 @@ export function ModulAlert(message) {
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 <h1>Hello, Interop!</h1>
-<h4>JS Interop</h4>
-<hr />@Message
+<br />
+<h4 style="background-color:aliceblue; padding:20px">JavaScript Interop</h4>
+@Message
 <hr />
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
 <button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptAlert">Script Alert</button>
+<hr>
 <button class="btn btn-primary" @onclick="@ModulelPrompt">Module Prompt</button>
 <button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button>
 <hr>
 ```
-
 ```c#
 @code {
     private IJSObjectReference module;
     string Message { get; set; } = "";
 
+    string Version { get { return "?v=" + DateTime.Now.Ticks.ToString(); } }
+
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        if (module is not null)
-        {
-            await module.DisposeAsync();
-        }
+        if (module is not null) { await module.DisposeAsync(); }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js");
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + Version);
         }
     }
 
@@ -252,22 +258,27 @@ export function ModulAlert(message) {
     async void ModulelPrompt()
     {
         string answer = await module.InvokeAsync<string>("ModulePrompt", "Module Prompt say what?");
-        Message = "Module Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        Message = "Module Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
 
     async void Prompt()
     {
         string answer = await JS.InvokeAsync<string>("prompt", "say what?");
-        Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        Message = "Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
 
     async void ScriptPrompt()
     {
         string answer = await JS.InvokeAsync<string>("ScriptPrompt", "ScriptPrompt say what?");
-        Message = "Script Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        Message = "Script Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
+    }
+
+    async void ScriptAlert()
+    {
+        await JS.InvokeVoidAsync("ScriptAlert", "Script Alert");
     }
 }
 ```
@@ -276,6 +287,12 @@ export function ModulAlert(message) {
 >Module is loaded after first render by the OnAfterRenderAsync method.<br>
 >ModulePrompt demonstrates calling the static method ScriptPrompt.<br>
 >ModuleAlert demonstrates calling another exported method from the same module.<br>
+> > Notice module appends an unique parameter Version tag when loaded:
+> > > module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + <b>Version</b>);
+> > > 
+> > This is a hack to bypass the browser cache which can stick during development.<br>
+> > To regain cache performance <b>Version</b> value can be replaced by an application release version number.<br>
+> > Which will then force a cache refresh once at first client run of new release.   
 
 >Build and run.
 
@@ -285,12 +302,31 @@ export function ModulAlert(message) {
 
 <ul>
 <b>Summary</b><br> 
-Section Part 2 covers JavaScript static and module interop. A precursor relevant to the next section Part 3 on TypeScript interop.
+Section Part 2 covers JavaScript static and module interop.<br>
+A precursor relevant to section Part 4 on TypeScript interop.
 </ul>  
 
 ---
+### Part 3. Debugging JavaScript<a name="3"></a>
+###### Now is a good time to review debugging JavaScript from Visual Studio
 
-### Part 3. Implement TypeScript Interop<a name="3"></a>
+&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug3.png)<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;Run application in debug mode F5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Run application in debug mode F5.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug1.png)<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug2.png)<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug3.png)<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug4.png)<br>
+
+### Part 4. Implement TypeScript Interop<a name="4"></a>
 ###### Let's proced to TypeScript interop.
 <b>1. Call isolated TypeScript</b><a name="3.1"></a>
 
