@@ -2,3 +2,7 @@
     return prompt(message);
 }
 
+function ScriptAlert(message) {
+    alert(message);
+}
+

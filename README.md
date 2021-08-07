@@ -283,3 +283,24 @@ Section Part 2 covers JavaScript static and module interop. A precursor relevant
 
 ### Part 3. Implement TypeScript Interop<a name="3"></a>
 ###### Let's proced to TypeScript interop.
+<b>1. Call isolated TypeScript</b><a name="3.1"></a>
+
+> Create new 'wwwroot/src/hello.ts' TypeScript file.
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image9.png)
+
+> Copy code to 'hello.ts'.
+
+```TypeScript
+export class Hello {
+
+    hello(): void {
+        alert("hello");
+    }
+    static goodbye(): void {
+        alert("goodbye");
+    }
+}
+
+export var HelloInstance = new Hello()
+```
