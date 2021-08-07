@@ -115,7 +115,7 @@ This demo will only use the home page.<br>
 <b>2. Call static JavaScript</b><a name="2.2"></a>
 <br>
 > Create new JavaScript file <br>
-> Create new src folder for JavaScript and Typescript files.<br>
+> Create new 'src' folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
  
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image5.png)
@@ -315,7 +315,7 @@ script.module.js avoids cached by unique param tag.
 
 <ul>
 <b>Summary</b><br>
-A project ready to demontrate JavaScript interop walkthrough has been created.<br>
+A project ready to demonstrate JavaScript interop walkthrough has been created.<br>
 Ignore Counter and Fetch Data pages that come with the template.
 This demo will only use the home page.<br>
 </ul>  
@@ -328,8 +328,8 @@ This demo will only use the home page.<br>
 
 >Visual Studio may hesitate to attach to the Chrome debugger.<br>
 >This issue not exclusive to Blazor.<br>
->More noticable as the JavaScript code and symbols grow.<br>
->Here are some situations and workaraounds that may help.<br>
+>More noticeable  as the JavaScript code and symbols grow.<br>
+>Here are some situations and workarounds that may help.<br>
 
 Set breakpoint in script.js as shown.<br>
 ![ScreenShot](readme/debug3.png)<br>
@@ -342,13 +342,13 @@ You can see the cached file in Script Document folders.<br>
 Click on file to see if cached contents are from a prior version.<br>
 ![ScreenShot](readme/debug2.png)<br>
 
-Try removing the breapoint and re-apply.<br>
-The debugger may re-attache.<br>
+Try removing the breakpoint and re-apply.<br>
+The debugger may re-attach.<br>
 ![ScreenShot](readme/debug3.png)<br>
 
 While app is running, press CTR+Shift+I in browser to view developer tools.<br>
-Select src/script.js in Sources panel and set breakpioint at shown.<br>
-This will trigger Visual Studio debugger re-attachement to Chrome.<br>
+Select src/script.js in Sources panel and set breakpoint at shown.<br>
+This will trigger Visual Studio debugger re-attachment to Chrome.<br>
 If this does not work, debugging in Chrome will suffice.<br>
 ![ScreenShot](readme/debug4.png)<br>
 
@@ -356,7 +356,7 @@ If this does not work, debugging in Chrome will suffice.<br>
 
 <ul>
 <b>Summary</b><br> 
-Section Part 3 reviews debugging and debugger attachement workaraounds.<br>
+Section Part 3 reviews debugging and debugger attachment workarounds.<br>
 It is recommended to do a debug code walkthrough to see the interop in action.
 </ul>  
 
