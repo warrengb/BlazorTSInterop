@@ -287,44 +287,81 @@ export function ModulAlert(message) {
 >Module is loaded after first render by the OnAfterRenderAsync method.<br>
 >ModulePrompt demonstrates calling the static method ScriptPrompt.<br>
 >ModuleAlert demonstrates calling another exported method from the same module.<br>
-> > Notice module appends an unique parameter Version tag when loaded:
-> > > module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + <b>Version</b>);
-> > > 
-> > This is a hack to bypass the browser cache which can stick during development.<br>
-> > To regain cache performance <b>Version</b> value can be replaced by an application release version number.<br>
-> > Which will then force a cache refresh once at first client run of new release.   
+
+>Notice module appends an unique parameter Version tag when loaded:
+>
+```c#
+...
+string Version { get { return "?v=" + DateTime.Now.Ticks.ToString(); } }
+...
+module = await JS.InvokeAsync<IJSObjectReference>
+                    ("import", "./src/script.module.js" + Version);
+...
+```
+>
+script.module.js avoids cached by unique param tag. 
+
+![ScreenShot](readme/image10.png)<br>
+> This is a hack to bypass the browser cache which may stick during development.<br>
+> To regain cache performance <b>Version</b> value can be replaced by an application release version number.
+> Which will then force a cache refresh once at first client run of new release.   
 
 >Build and run.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image8.png)
 
+
+---
+
+<ul>
+<b>Summary</b><br>
+A project ready to demontrate JavaScript interop walkthrough has been created.<br>
+Ignore Counter and Fetch Data pages that come with the template.
+This demo will only use the home page.<br>
+</ul>  
+
+---
+
+
+### Part 3. Debugging JavaScript<a name="3"></a>
+###### Now is a good time to review debugging JavaScript from Visual Studio
+
+>Visual Studio may hesitate to attach to the Chrome debugger.<br>
+>This issue not exclusive to Blazor.<br>
+>More noticable as the JavaScript code and symbols grow.<br>
+>Here are some situations and workaraounds that may help.<br>
+
+Set breakpoint in script.js as shown.<br>
+![ScreenShot](readme/debug3.png)<br>
+
+Run application in debug mode F5.<br>
+The debugger is not attached if the breakpoint red circle is hollow.<br>
+![ScreenShot](readme/debug1.png)<br>
+
+You can see the cached file in Script Document folders.<br>
+Click on file to see if cached contents are from a prior version.<br>
+![ScreenShot](readme/debug2.png)<br>
+
+Try removing the breapoint and re-apply.<br>
+The debugger may re-attache.<br>
+![ScreenShot](readme/debug3.png)<br>
+
+While app is running, press CTR+Shift+I in browser to view developer tools.<br>
+Select src/script.js in Sources panel and set breakpioint at shown.<br>
+This will trigger Visual Studio debugger re-attachement to Chrome.<br>
+If this does not work, debugging in Chrome will suffice.<br>
+![ScreenShot](readme/debug4.png)<br>
+
 ---
 
 <ul>
 <b>Summary</b><br> 
-Section Part 2 covers JavaScript static and module interop.<br>
-A precursor relevant to section Part 4 on TypeScript interop.
+Section Part 3 reviews debugging and debugger attachement workaraounds.<br>
+It is recommended to do a debug code walkthrough to see the interop in action.
 </ul>  
 
 ---
-### Part 3. Debugging JavaScript<a name="3"></a>
-###### Now is a good time to review debugging JavaScript from Visual Studio
 
-&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug3.png)<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;Run application in debug mode F5.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;Run application in debug mode F5.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug1.png)<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug2.png)<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug3.png)<br>
-
-&nbsp;&nbsp;&nbsp;&nbsp;Set breakpoint on script.js as shown.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/debug4.png)<br>
 
 ### Part 4. Implement TypeScript Interop<a name="4"></a>
 ###### Let's proced to TypeScript interop.
