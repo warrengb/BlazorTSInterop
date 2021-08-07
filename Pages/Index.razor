@@ -2,31 +2,34 @@
 @inject IJSRuntime JS
 @implements IAsyncDisposable
 <h1>Hello, Interop!</h1>
-<h4>JS Interop</h4>
-<hr />@Message
+<br />
+<h4 style="background-color:aliceblue; padding:20px">JavaScript Interop</h4>
+@Message
 <hr />
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
 <button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptAlert">Script Alert</button>
+<hr>
 <button class="btn btn-primary" @onclick="@ModulelPrompt">Module Prompt</button>
 <button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button>
 <hr>
+
 @code {
     private IJSObjectReference module;
     string Message { get; set; } = "";
 
+    string Version { get { return "?v=" + DateTime.Now.Ticks.ToString(); } }
+
     async ValueTask IAsyncDisposable.DisposeAsync()
     {
-        if (module is not null)
-        {
-            await module.DisposeAsync();
-        }
+        if (module is not null) { await module.DisposeAsync(); }
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js");
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + Version);
         }
     }
 
@@ -38,21 +41,27 @@
     async void ModulelPrompt()
     {
         string answer = await module.InvokeAsync<string>("ModulePrompt", "Module Prompt say what?");
-        Message = "Module Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        Message = "Module Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
 
     async void Prompt()
     {
         string answer = await JS.InvokeAsync<string>("prompt", "say what?");
-        Message = "Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        Message = "Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
 
     async void ScriptPrompt()
     {
         string answer = await JS.InvokeAsync<string>("ScriptPrompt", "ScriptPrompt say what?");
-        Message = "Script Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        Message = "Script Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
+
+    async void ScriptAlert()
+    {
+        await JS.InvokeVoidAsync("ScriptAlert", "Script Alert");
+    }
+
 }

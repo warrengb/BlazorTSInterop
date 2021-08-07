@@ -124,11 +124,14 @@ This demo will only use the home page.<br>
 function ScriptPrompt(message){
     return prompt(message);
 }
+
+function ScriptAlert(message) {
+    alert(message);
+}
 ```
 
-> Static assets serve one global entry point defined by the method in file.
-> Other methods and data within file are private.
-> ScriptPrompt method will be callable from other JavaScript modules including isolated modules.
+> Methods ScriptPrompt and ScriptAlert will be loaded globally.<br>
+> Visible to other JavaScript modules including isolated modules.
 
 > Add 'script.js' as static asset in 'Index.html' after 'webassemly.js'.
 
@@ -140,17 +143,18 @@ function ScriptPrompt(message){
 ...
 </body>
 ```
-> Replace all of 'Index.razor' contents with following code snippets respectfully to add ScriptPrompt button and method. 
+> Replace all of 'Index.razor' contents with following code snippets respectfully to add ScriptPrompt and ScriptAlert buttons with action method. 
 
 ```html
 @page "/"
 @inject IJSRuntime JS
-<h1>Hello, Interop!</h1>
-<hr />@Message<hr />
-<h4>JS Interop</h4>
+@implements IAsyncDisposable
+<h1>Hello, Interop!</h1><br />
+<h4 style="background-color:aliceblue; padding:20px">JavaScript Interop</h4>
+@Message<hr />
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
 <button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
-<hr>
+<button class="btn btn-primary" @onclick="@ScriptAlert">Script Alert</button><hr>
 ```
 ```c#
 @code {
@@ -169,12 +173,17 @@ function ScriptPrompt(message){
         Message = "Script Prompt: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
         StateHasChanged();
     }
+
+    async void ScriptAlert()
+    {
+        await JS.InvokeVoidAsync("ScriptAlert", "Script Alert");
+    }
 }
 ```
 > Prompt demonstrates calling a browser API method.<br>
 > ScriptPrompt demonstrates calling a static JavaScript method.
 
->Run to ScreenShot static custom JavaScript method  ScriptPrompt.
+>Run to test JavaScript sript methods ScriptPrompt and ScriptAlert.
  
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
 
