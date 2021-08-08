@@ -1,10 +1,12 @@
-﻿export class Hello {
+﻿declare function ScriptAlert(message:string);
+
+export class Hello {
 
     hello(): void {
-        alert("hello");
+        ScriptAlert("hello");
     }
     static goodbye(): void {
-        alert("goodbye");
+        ScriptAlert("goodbye");
     }
 }
 
