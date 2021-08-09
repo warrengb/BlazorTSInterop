@@ -6,9 +6,9 @@
 An elegant way to interface your Blazor C# WebAssembly (Wasm) with the browsers JavaScript API and libraries.
 Wasm can only communicate with the browser JavaScript API and can't reach outside the browser’s security sandbox.
 Calling JavaScript from C# and vice-versa requires some thought. Leveraging TypeScript will guide better interop interface design.
-Discussion will contain a brief overview on the technology and variations of how to interop Blazor with Typescript. 
+Discussion will contain a brief overview on the technology and variations of how to interop Blazor with TypeScript. 
 An implementation walkthrough will further explain by code example available on GitHub.
-Walkthrough starts off with plain old JavaScript, then progresses to Typescript and Typescript utilizing NPM library.
+Walkthrough starts off with plain old JavaScript, then progresses to TypeScript and TypeScript utilizing NPM library.
 For more information on Blazor Interop see 
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
   
@@ -37,7 +37,7 @@ Using Typescript benefits code design such as structural design patterns like fa
 ![ScreenShot](readme/interop.png)
 &nbsp;&nbsp;&nbsp;&nbsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
-The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# needs JavaScipt interop.
+The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# needs JavaScript interop.
 Existing Blazor .NET libraries for the browser, such as the C# WebSocket class, are JavaScript interop wrappers.
 
 ---
@@ -49,7 +49,7 @@ Lets get started.
 ---
 
 ## Part 1 Create Blazor Project<a name="1"></a>
-###### To start off we will just create a new blazor app.
+###### To start off we will just create a new Blazor app.
 
 
 > Create new Blazor WebAssembly App.
@@ -60,7 +60,7 @@ Lets get started.
 >  
 ![ScreenShot](readme/image1.png)
 
->  Use .NET 5.0 client only, No secutiry and no PWA.
+>  Use .NET 5.0 client only, No security and no PWA.
 >  
 ![ScreenShot](readme/image2.png)
 
@@ -72,7 +72,7 @@ Lets get started.
 
 <ul>
 <b>Summary</b><br>
-A project ready to demontrate JavaScript interop walkthrough has been created.<br>
+A project ready to demonstrate JavaScript interop walkthrough has been created.<br>
 Ignore Counter and Fetch Data pages that come with the template.
 This demo will only use the home page.<br>
 </ul>  
@@ -210,7 +210,7 @@ export function ModulAlert(message) {
 > Module methods demonstrates calling global script methods.<br>
 > > Note the 'export' method prefix.<br>
 > > This is ES module syntax to mark code as importable.<br>
-> > Not used or recognized by inherently global embedded scripts. 
+> > 'export' is not used by global embedded script.js. 
 
 > Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
 ```html
@@ -364,7 +364,7 @@ It is recommended to do a debug code walkthrough to see the interop in action.
 
 
 ### Part 4. Implement TypeScript Interop<a name="4"></a>
-###### Let's proced to TypeScript interop.
+###### Let's proceed to TypeScript interop.
 <b>1. Call isolated TypeScript</b><a name="3.1"></a>
 
 > Create new 'wwwroot/src/hello.ts' TypeScript file.
@@ -372,17 +372,113 @@ It is recommended to do a debug code walkthrough to see the interop in action.
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image9.png)
 
 > Copy code to 'hello.ts'.
+> Note class methods access ScriptAlert from embedded 'script.js'
 
 ```TypeScript
+declare function ScriptAlert(message:string);
+
 export class Hello {
 
     hello(): void {
-        alert("hello");
+        ScriptAlert("hello");
     }
     static goodbye(): void {
-        alert("goodbye");
+        ScriptAlert("goodbye");
     }
 }
 
-export var HelloInstance = new Hello()
+export var HelloInstance = new Hello();
 ```
+
+> Include Microsoft.TypeScript.MSBuild from Nuget Package Manager.
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image11.png)
+
+> Set Version:ECMAScript, TSX:None, Module:ES2015 in Project/Properties/Typescript Build
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image12.png)
+
+> Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
+```html
+@page "/"
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+<h1>Hello, Interop!</h1>
+<h4 style="background-color:aliceblue; padding:20px">JavaScript Interop</h4>
+@Message<hr>
+<button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
+<button class="btn btn-primary" @onclick="@ScriptAlert">Script Alert</button><hr>
+<button class="btn btn-primary" @onclick="@ModulelPrompt">Module Prompt</button>
+<button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button><br /><br />
+<h4 style="background-color:aliceblue; padding:20px">TypeScript Interop</h4><hr>
+<button class="btn btn-primary" @onclick="@HelloAlert">Hello Alert</button>
+```
+```c#
+@code {
+    private IJSObjectReference module;
+    private IJSObjectReference hello;
+    string Message { get; set; } = "";
+
+    string Version { get { return "?v=" + DateTime.Now.Ticks.ToString(); } }
+
+    async ValueTask IAsyncDisposable.DisposeAsync()
+    {
+        if (module is not null) { await module.DisposeAsync(); }
+        if (hello is not null) { await module.DisposeAsync(); }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + Version);
+            hello = await JS.InvokeAsync<IJSObjectReference>("import", "./src/hello.js" + Version);
+        }
+    }
+
+    async void ModulelAlert()
+    {
+        await module.InvokeVoidAsync("ModulAlert", "Modulel Alert");
+    }
+
+    async void ModulelPrompt()
+    {
+        string answer = await module.InvokeAsync<string>("ModulePrompt", "Module Prompt say what?");
+        Message = "Module Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void Prompt()
+    {
+        string answer = await JS.InvokeAsync<string>("prompt", "say what?");
+        Message = "Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void ScriptPrompt()
+    {
+        string answer = await JS.InvokeAsync<string>("ScriptPrompt", "ScriptPrompt say what?");
+        Message = "Script Prompt said: " + (String.IsNullOrEmpty(answer) ? "nothing" : answer);
+        StateHasChanged();
+    }
+
+    async void ScriptAlert()
+    {
+        await JS.InvokeVoidAsync("ScriptAlert", "Script Alert");
+    }
+
+    async void HelloAlert()
+    {
+        await hello.InvokeVoidAsync("HelloInstance.hello");
+        await hello.InvokeVoidAsync("Hello.goodbye");
+    }
+}
+```
+> Another module 'hello' has been added to load the JavaScript file hello.js generated by hello.ts 
+> HelloAlert method demontrates calling a TypeScript class method 'goodbye and object instance method 'hello'.
+> These methods are using ScriptAlert function from embedded script 'script.js'   
+
+> Build, Run and test Hello Alert
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image13.png)
