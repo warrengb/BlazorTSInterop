@@ -17,10 +17,14 @@ For more information on Blazor Interop see
 1. [Create Blazor Project](#1)<br>
 2. [Implement JavaScript Interop](#2)<br>
     1. [Call JavaScript Browser API](#2.1)<br>
-    2. [Call static JavaScript](#2.2)
-    3. [Call isolated JavaScript](#2.3)
+    2. [Call Embedded JavaScript](#2.2)
+    3. [Call Isolated JavaScript](#2.3)
 3. [Debugging JavaScript](#3)<br>
 4. [Implement TypeScript Interop](#4)<br>
+    1. [Call Isolated TypeScript](#4.1)<br>
+    2. [Setup Webpack Build Pipeline](#4.2)<br>
+    3. [Call Webpack TypeScript](#4.3)<br>
+    4. [Call NPM TypeScript](#4.4)
 
 ***     
 
@@ -112,7 +116,7 @@ This demo will only use the home page.<br>
 
 ---
 
-<b>2. Call static JavaScript</b><a name="2.2"></a>
+<b>2. Call Embedded JavaScript</b><a name="2.2"></a>
 <br>
 > Create new JavaScript file <br>
 > Create new 'src' folder for JavaScript and Typescript files.<br>
@@ -190,7 +194,7 @@ function ScriptAlert(message) {
  
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
 
-<b>3. Call isolated JavaScript</b><a name="2.3"></a>
+<b>3. Call Isolated JavaScript</b><a name="2.3"></a>
 
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
@@ -365,13 +369,13 @@ It is recommended to do a debug code walkthrough to see the interop in action.
 
 ### Part 4. Implement TypeScript Interop<a name="4"></a>
 ###### Let's proceed to TypeScript interop.
-<b>1. Call isolated TypeScript</b><a name="3.1"></a>
+<b>1. Call Isolated TypeScript</b><a name="4.1"></a>
 
 > Create new 'wwwroot/src/hello.ts' TypeScript file.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image9.png)
 
-> Copy code to 'hello.ts'.
+> Copy code to 'hello.ts'.<br>
 > Note class methods access ScriptAlert from embedded 'script.js'
 
 ```TypeScript
@@ -482,3 +486,161 @@ export var HelloInstance = new Hello();
 > Build, Run and test Hello Alert.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image13.png)
+
+<b>2. Setup Webpack Build Pipeline</b><a name="4.2"></a><br>
+
+> Install recommended version of Node https://nodejs.org/en/ <br>
+> Right click on the 'wwwroot' folder and select popup menu item 'Open in Terminal'.<br>
+> > 'Open in Terminal' is available in VS 2019 version 16.6 and above.<br>
+> >  Alternitavly you can use any command line tool from the 'wwwroot' folder.
+> > 
+> This opens a PowerShell terminal window in editor.<br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image15.png)
+
+> Execute command below to create package.json 
+```
+npm init -y
+```
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image16.png)
+
+> Execute command below to install webpack and typescript tools 
+> 
+```
+npm i ts-loader typescript webpack webpack-cli
+```
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image17.png)
+
+> Add scripts entry "build": "webpack" in 'package.json'<br>
+> Or replace 'package.json' with json contents below.
+```json
+{
+  "name": "wwwroot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.130.1",
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.5",
+    "webpack": "^5.45.1",
+    "webpack-cli": "^4.7.2"
+  }
+}
+```
+> Create tsconfig.json in 'wwwroot' folder with contents below.
+
+```json
+{
+  "display": "Node 14",
+
+  "compilerOptions": {
+    "allowJs": true,
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "lib": [ "es2020", "DOM" ],
+    "target": "es6",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "moduleResolution": "node"
+  },
+  "include": [ "src/**/*.ts" ],
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ]
+}
+```
+---
+
+<ul>
+Projects TypeScript build properties will be disabled, no longer applicable.<br>
+Visual Studio will now use tsconfig.json for TypeScript configuration.   
+</ul>  
+
+---
+
+> Create webpack.config.json in 'wwwroot' folder with contents below.
+
+```JavaScript
+const path = require("path");
+
+module.exports = {
+    mode: 'development',
+    devtool: 'eval-source-map',
+    module: {
+        rules: [
+            {
+                test: /\.(ts)$/,
+                exclude: /node_modules/,
+                include: [path.resolve(__dirname, 'src')],
+                use: 'ts-loader',
+            }
+        ]
+    },
+    resolve: {
+        extensions: ['.ts', '.js'],
+    },
+    entry: {
+        index: ['./src/index']  
+    },
+    output: {
+        path: path.resolve(__dirname, '../wwwroot/public'),
+        filename: '[name]-bundle.js',
+        library: "[name]"
+    }
+};
+```
+
+> Add below section contents within ... to BlazorTSInterp.csproj file to invoke webpack prebuild.
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+...
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm install" WorkingDirectory="wwwroot" />
+    <Exec Command="npm run build" WorkingDirectory="wwwroot" />
+  </Target>
+...
+</Project>
+```
+> Microsoft.TypeScript.MSBuild process is, no longer needed, bypassed by the webpack typescript prebuild.
+> However, no harm done leaving it in for this demo.
+
+<b>3. Call Webpack TypeScript</b><a name="4.3"></a><br>
+
+> Create new 'wwwroot/src/index.ts' TypeScript file.
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image14.png)
+
+> Copy code to 'index.ts'.<br>
+> Notice index is a hello wrapper.
+
+```TypeScript
+import { Hello, HelloInstance } from './hello';
+
+export class Index {
+    hello(): void {
+        HelloInstance.hello();
+    }
+    static goodbye(): void {
+        Hello.goodbye();
+    }
+}
+
+export var IndexInstance = new Index();
+```

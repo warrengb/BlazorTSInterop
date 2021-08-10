@@ -21,21 +21,10 @@
   <ItemGroup>
     <TypeScriptCompile Include="wwwroot\src\hello.ts" />
   </ItemGroup>
-
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
-    <TypeScriptTarget>ES2015</TypeScriptTarget>
-    <TypeScriptJSXEmit>None</TypeScriptJSXEmit>
-    <TypeScriptModuleKind>ES6</TypeScriptModuleKind>
-    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
-    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
-    <TypeScriptRemoveComments>False</TypeScriptRemoveComments>
-    <TypeScriptOutFile />
-    <TypeScriptOutDir />
-    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
-    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
-    <TypeScriptSourceMap>True</TypeScriptSourceMap>
-    <TypeScriptMapRoot />
-    <TypeScriptSourceRoot />
-  </PropertyGroup>
+  
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="npm install" WorkingDirectory="wwwroot" />
+    <Exec Command="npm run build" WorkingDirectory="wwwroot" />
+  </Target>
 
 </Project>
