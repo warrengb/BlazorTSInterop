@@ -34,9 +34,9 @@ Wasm coded in C#. Blazor is an attractive alternative to Angular, React, Vue and
 Blazor MAUI, a continuation of Xamarin with Blazor webview is another great addition to the .NET stack that completes a .NET developer ecosystem for device and browser applications.
 
 ![ScreenShot](readme/tscircle.png)
-**Typescript** is a superset of JavaScript for application-scale development featuring strong types and geared for object-oriented programming.
-Typescript transpiles to JavaScript, so references to JavaScript going forward is either plain old JavaScript or the result of transpiled TypeScript to JavaScript consumable by the browser.
-Using Typescript benefits code design such as structural design patterns like facades, adapters and bridges. 
+**TypeScript** is a superset of JavaScript for application-scale development featuring strong types and geared for object-oriented programming.
+TypeScript transpiles to JavaScript, so references to JavaScript going forward is either plain old JavaScript or the result of transpiled TypeScript to JavaScript consumable by the browser.
+Using Typescript will benefit Blazer interop code designs. Especially in the are of structural design patterns like facades, adapters and bridges.
 
 ![ScreenShot](readme/interop.png)
 &nbsp;&nbsp;&nbsp;&nbsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
@@ -568,7 +568,7 @@ npm i ts-loader typescript webpack webpack-cli
 ---
 
 <ul>
-Projects TypeScript build properties will be disabled, no longer applicable.<br>
+This disables the project TypeScript build properties which are no longer applicable.<br>
 Visual Studio will now use tsconfig.json for TypeScript configuration.   
 </ul>  
 
@@ -605,6 +605,13 @@ module.exports = {
     }
 };
 ```
+> This script tells webpack to use ts-loader to transpile .ts files to .js.<br>
+> For each entry [name] create a JavaScript library [name].<br>
+> File [name]-bundle is genreated in the 'wwwroot/public' folder.<br>
+> This script has one entry named 'index'.<br>
+> Transpiles input file './src/index.ts' to output file './src/index.js'.<br>
+> A second pass bundles './src/index.js' with dependency code and 
+> outputs to file '../wwwroot/public/index-bundle.js'
 
 > Add below section contents within ... to BlazorTSInterp.csproj file to invoke webpack prebuild.
 
@@ -618,8 +625,8 @@ module.exports = {
 ...
 </Project>
 ```
-> Microsoft.TypeScript.MSBuild process is, no longer needed, bypassed by the webpack typescript prebuild.
-> However, no harm done leaving it in for this demo.
+> Microsoft.TypeScript.MSBuild process is no longer needed as it is bypassed the webpack typescript pre-build.
+> No harm done leaving it in for this demo.
 
 <b>3. Call Webpack TypeScript</b><a name="4.3"></a><br>
 
@@ -628,7 +635,7 @@ module.exports = {
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image14.png)
 
 > Copy code to 'index.ts'.<br>
-> Notice index is a hello wrapper.
+> Notice Index is a Hello wrapper.
 
 ```TypeScript
 import { Hello, HelloInstance } from './hello';
@@ -644,3 +651,48 @@ export class Index {
 
 export var IndexInstance = new Index();
 ```
+
+> Build CTRL+Shift+B creates 'index.js' and 'index_bundle.js' in the 'public' directory.
+> 
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image18.png)
+
+---
+
+<ul>
+Search to find 'ScriptAlert' in the new 'index-bundle.js'.<br>
+To verify bundle of 'index.js' includes 'hello.js' dependency code.<br>
+Bundles include dependent code.<br>
+However; a bundle will have only one entry.<br>
+Interop can only access the Index class entry, not Hello class, from 'index_bundle.js'.<br>
+Which means dependent code will be encapsulated.<br>
+</ul>  
+
+---
+
+> Add 'index-bundle.js' as static asset in 'Index.html' after 'script.js'.
+
+```html
+<body>
+...
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script src="src/script.js"></script>
+    <script src="public/index-bundle.js"></script>
+...
+</body>
+```
+> In 'Index.razor' html section add this line as last button. 
+
+```html
+<button class="btn btn-primary" @onclick="@BundleIndexHello">Bundle Index Hello</button>
+```
+> In 'Index.razor' code section add this as last method. 
+```c#
+async void BundleIndexHello()
+{
+    await JS.InvokeVoidAsync("index.IndexInstance.hello");
+    await JS.InvokeVoidAsync("index.Index.goodbye");
+}
+```
+> Build and run.
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image19.png)

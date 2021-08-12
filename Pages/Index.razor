@@ -11,6 +11,7 @@
 <button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button><br /><br />
 <h4 style="background-color:aliceblue; padding:20px">TypeScript Interop</h4><hr>
 <button class="btn btn-primary" @onclick="@HelloAlert">Hello Alert</button>
+<button class="btn btn-primary" @onclick="@BundleIndexHello">Bundle Index Hello</button>
 
 @code {
     private IJSObjectReference module;
@@ -69,5 +70,11 @@
     {
         await hello.InvokeVoidAsync("HelloInstance.hello");
         await hello.InvokeVoidAsync("Hello.goodbye");
+    }
+
+    async void BundleIndexHello()
+    {
+        await JS.InvokeVoidAsync("index.IndexInstance.hello");
+        await JS.InvokeVoidAsync("index.Index.goodbye");
     }
 }
