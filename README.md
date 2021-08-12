@@ -696,3 +696,5 @@ async void BundleIndexHello()
 > Build and run.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image19.png)
+
+<b>3. Call NPM TypeScript</b><a name="4.4"></a><br>
