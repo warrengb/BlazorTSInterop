@@ -314,18 +314,15 @@ script.module.js avoids cached by unique param tag.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image8.png)
 
-
 ---
 
 <ul>
 <b>Summary</b><br>
-A project ready to demonstrate JavaScript interop walkthrough has been created.<br>
-Ignore Counter and Fetch Data pages that come with the template.
-This demo will only use the home page.<br>
+Part 2 covers calling Isolated and Embedded JavaScript.<br>
+A precursor to calling TypeScript interop from Blazor.
 </ul>  
 
 ---
-
 
 ### Part 3. Debugging JavaScript<a name="3"></a>
 ###### Now is a good time to review debugging JavaScript from Visual Studio
@@ -360,12 +357,11 @@ If this does not work, debugging in Chrome will suffice.<br>
 
 <ul>
 <b>Summary</b><br> 
-Section Part 3 reviews debugging and debugger attachment workarounds.<br>
+Part 3 reviews debugging and debugger attachment workarounds.<br>
 It is recommended to do a debug code walkthrough to see the interop in action.
 </ul>  
 
 ---
-
 
 ### Part 4. Implement TypeScript Interop<a name="4"></a>
 ###### Let's proceed to TypeScript interop.
@@ -486,6 +482,15 @@ export var HelloInstance = new Hello();
 > Build, Run and test Hello Alert.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image13.png)
+
+---
+
+<ul>
+<b>Summary</b><br>
+This section has demonstrated TypeScript interop using the built in Visual Studio TypeScript toolsets
+</ul>
+
+---
 
 <b>2. Setup Webpack Build Pipeline</b><a name="4.2"></a><br>
 
@@ -628,6 +633,15 @@ module.exports = {
 > Microsoft.TypeScript.MSBuild process is no longer needed as it is bypassed the webpack typescript pre-build.
 > No harm done leaving it in for this demo.
 
+---
+
+<ul>
+<b>Summary</b><br>
+This section has covered preparing a Blazor project with Webpack toolset for creating TypeScript bundles.
+</ul>
+
+---
+
 <b>3. Call Webpack TypeScript</b><a name="4.3"></a><br>
 
 > Create new 'wwwroot/src/index.ts' TypeScript file.
@@ -635,10 +649,12 @@ module.exports = {
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image14.png)
 
 > Copy code to 'index.ts'.<br>
-> Notice Index is a Hello wrapper.
+> Index class is a Hello class wrapper.<br>
+> Index module also exports Hello class and HelloInstance object.
 
 ```TypeScript
 import { Hello, HelloInstance } from './hello';
+export { Hello, HelloInstance } from './hello'
 
 export class Index {
     hello(): void {
@@ -649,7 +665,7 @@ export class Index {
     }
 }
 
-export var IndexInstance = new Index();
+export var IndexInstance = new Index()
 ```
 
 > Build CTRL+Shift+B creates 'index.js' and 'index_bundle.js' in the 'public' directory.
@@ -662,9 +678,8 @@ export var IndexInstance = new Index();
 Search to find 'ScriptAlert' in the new 'index-bundle.js'.<br>
 To verify bundle of 'index.js' includes 'hello.js' dependency code.<br>
 Bundles include dependent code.<br>
-However; a bundle will have only one entry.<br>
-Interop can only access the Index class entry, not Hello class, from 'index_bundle.js'.<br>
-Which means dependent code will be encapsulated.<br>
+However; a bundle will have only one module entry.<br>
+Interop can only access exported items from the module.
 </ul>  
 
 ---
@@ -697,4 +712,44 @@ async void BundleIndexHello()
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image19.png)
 
+> Bundle Index Hello button demonstrates calling Index class methods exported from 'index' library 
+
+> In 'Index.razor' html section add this line as last button. 
+
+```html
+<button class="btn btn-primary" @onclick="@ReExportHello">ReExport Hello</button>
+```
+> In 'Index.razor' code section add this as last method. 
+```c#
+async void ReExportHello()
+{
+    await JS.InvokeVoidAsync("index.HelloInstance.hello");
+    await JS.InvokeVoidAsync("index.Hello.goodbye");
+}
+```
+> Build and run.
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image20.png)
+
+> ReExport Hello button demonstrates calling Hello class methods exported from 'index' library 
+
+---
+
+<ul>
+<b>Summary</b><br>
+This section has covered calling TypeScript from Webpack bundles.<br>
+A bundle can expose dependency code by export from the bundles entry module. 
+</ul>  
+
+---
+
 <b>3. Call NPM TypeScript</b><a name="4.4"></a><br>
+
+---
+
+<ul>
+<b>Summary</b><br>
+This section has covered calling TypeScript from Webpack bundles.
+</ul>
+
+---
