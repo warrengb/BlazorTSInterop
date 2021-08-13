@@ -631,7 +631,11 @@ module.exports = {
 </Project>
 ```
 > Microsoft.TypeScript.MSBuild process is no longer needed as it is bypassed the webpack typescript pre-build.
-> No harm done leaving it in for this demo.
+
+> No harm done leaving it in for this demo.<br>
+> Or you can delete by right click remove.
+
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image21.png)
 
 ---
 
