@@ -1,4 +1,5 @@
 ﻿import { Hello, HelloInstance } from './hello';
+export { Hello, HelloInstance } from './hello'
 
 export class Index {
     hello(): void {
@@ -10,4 +11,3 @@ export class Index {
 }
 
 export var IndexInstance = new Index();
-
