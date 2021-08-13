@@ -83,11 +83,10 @@ This demo will only use the home page.<br>
 
 ---
 
-### Part 2. Implement JavaScript Interop<a name="2"></a>
+## Part 2. Implement JavaScript Interop<a name="2"></a>
 ###### Before we get to Typescript, let's see how JavaScript interops.
 
-<b>1. Call JavaScript Browser API</b><a name="2.1"></a>
-<br> 
+#### 1. Call JavaScript Browser API</b><a name="2.1"></a>
 > Replace all of Index.razor contents with following code snippets respectfully. 
 ```html
 @page "/"
@@ -116,8 +115,7 @@ This demo will only use the home page.<br>
 
 ---
 
-<b>2. Call Embedded JavaScript</b><a name="2.2"></a>
-<br>
+#### 2. Call Embedded JavaScript</b><a name="2.2"></a>
 > Create new JavaScript file <br>
 > Create new 'src' folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
@@ -194,8 +192,7 @@ function ScriptAlert(message) {
  
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
 
-<b>3. Call Isolated JavaScript</b><a name="2.3"></a>
-
+#### 3. Call Isolated JavaScript</b><a name="2.3"></a>
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image7.png)
@@ -324,7 +321,7 @@ A precursor to calling TypeScript interop from Blazor.
 
 ---
 
-### Part 3. Debugging JavaScript<a name="3"></a>
+## Part 3. Debugging JavaScript<a name="3"></a>
 ###### Now is a good time to review debugging JavaScript from Visual Studio
 
 >Visual Studio may hesitate to attach to the Chrome debugger.<br>
@@ -363,9 +360,9 @@ It is recommended to do a debug code walkthrough to see the interop in action.
 
 ---
 
-### Part 4. Implement TypeScript Interop<a name="4"></a>
+## Part 4. Implement TypeScript Interop<a name="4"></a>
 ###### Let's proceed to TypeScript interop.
-<b>1. Call Isolated TypeScript</b><a name="4.1"></a>
+#### 1. Call Isolated TypeScript</b><a name="4.1"></a>
 
 > Create new 'wwwroot/src/hello.ts' TypeScript file.
 
@@ -492,7 +489,7 @@ This section has demonstrated TypeScript interop using the built in Visual Studi
 
 ---
 
-<b>2. Setup Webpack Build Pipeline</b><a name="4.2"></a><br>
+#### 2. Setup Webpack Build Pipeline</b><a name="4.2"></a><br>
 
 > Install recommended version of Node https://nodejs.org/en/ <br>
 > Right click on the 'wwwroot' folder and select popup menu item 'Open in Terminal'.<br>
@@ -633,7 +630,7 @@ module.exports = {
 > Microsoft.TypeScript.MSBuild process is no longer needed as it is bypassed the webpack typescript pre-build.
 
 > No harm done leaving it in for this demo.<br>
-> Or you can delete by right click remove.
+> Or you can select and delete to remove.
 
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image21.png)
 
@@ -646,7 +643,7 @@ This section has covered preparing a Blazor project with Webpack toolset for cre
 
 ---
 
-<b>3. Call Webpack TypeScript</b><a name="4.3"></a><br>
+#### 3. Call Webpack TypeScript</b><a name="4.3"></a><br>
 
 > Create new 'wwwroot/src/index.ts' TypeScript file.
 
@@ -742,12 +739,13 @@ async void ReExportHello()
 <ul>
 <b>Summary</b><br>
 This section has covered calling TypeScript from Webpack bundles.<br>
-A bundle can expose dependency code by export from the bundles entry module. 
+A bundle can expose dependency code by export from the bundle entry module.<br>
+Bundles are embedded resources accessible by Blazor interop via the bundle library prefix.
 </ul>  
 
 ---
 
-<b>3. Call NPM TypeScript</b><a name="4.4"></a><br>
+## 4. Call NPM TypeScript</b><a name="4.4"></a><br>
 
 ---
 

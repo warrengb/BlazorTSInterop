@@ -22,6 +22,6 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, '../wwwroot/public'),
         filename: '[name]-bundle.js',
-
+        library: "[name]"
     }
 };
