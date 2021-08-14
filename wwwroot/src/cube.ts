@@ -17,7 +17,7 @@ export class Cube {
         light.position.set(-1, 2, 4);
         this.scene.add(light);
 
-        const geometry = new THREE.BoxGeometry(.5, .5, .5);
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
         const loadManager = new THREE.LoadingManager();
         const loader = new THREE.TextureLoader(loadManager);
         const texBlazor = loader.load('images/blazor.png');
@@ -44,8 +44,7 @@ export class Cube {
         requestAnimationFrame(this.animate.bind(this));
     }
 
-    static Create(): number {
+    static Create(): void {
         new Cube();
-        return 0;
     }
 }

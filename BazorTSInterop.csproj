@@ -1,11 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+﻿<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\tsinterop.png" />
     <Content Remove="wwwroot\src\hello.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\tsinterop.png" />
   </ItemGroup>
 
   <ItemGroup>

@@ -14,8 +14,8 @@
 <button class="btn btn-primary" @onclick="@BundleIndexHello">Bundle Index Hello</button>
 <button class="btn btn-primary" @onclick="@ReExportHello">ReExport Hello</button><br /><br />
 <h4 style="background-color:aliceblue; padding:20px">TypeScript NPM Interop</h4><hr>
-<button class="btn btn-primary" @onclick="@ShowCube">ShowvCube</button><br /><br />
-<canvas id="cube"/>
+<img src="./images/tsinterop.png" style="z-index: 2;"/>
+<canvas id="cube" width="363" height="363" style="z-index: 1; position: absolute; opacity: 1;  margin-Left: -23em;" />
 
 @code {
     private IJSObjectReference module;
@@ -36,6 +36,7 @@
         {
             module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + Version);
             hello = await JS.InvokeAsync<IJSObjectReference>("import", "./src/hello.js" + Version);
+            await JS.InvokeVoidAsync("cube.Cube.Create");
         }
     }
 
@@ -86,10 +87,5 @@
     {
         await JS.InvokeVoidAsync("index.HelloInstance.hello");
         await JS.InvokeVoidAsync("index.Hello.goodbye");
-    }
-
-    async void ShowCube()
-    {
-        await JS.InvokeVoidAsync("cube.Cube.Create");
     }
 }
