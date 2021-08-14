@@ -14,6 +14,8 @@
 <button class="btn btn-primary" @onclick="@BundleIndexHello">Bundle Index Hello</button>
 <button class="btn btn-primary" @onclick="@ReExportHello">ReExport Hello</button><br /><br />
 <h4 style="background-color:aliceblue; padding:20px">TypeScript NPM Interop</h4><hr>
+<button class="btn btn-primary" @onclick="@ShowCube">ShowvCube</button><br /><br />
+<canvas id="cube"/>
 
 @code {
     private IJSObjectReference module;
@@ -84,5 +86,10 @@
     {
         await JS.InvokeVoidAsync("index.HelloInstance.hello");
         await JS.InvokeVoidAsync("index.Hello.goodbye");
+    }
+
+    async void ShowCube()
+    {
+        await JS.InvokeVoidAsync("cube.Cube.Create");
     }
 }

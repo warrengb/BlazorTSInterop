@@ -17,7 +17,9 @@ module.exports = {
         extensions: ['.ts', '.js'],
     },
     entry: {
-        index: ['./src/index']  
+        index: ['./src/index'],
+        cube: ['./src/cube'],
+
     },
     output: {
         path: path.resolve(__dirname, '../wwwroot/public'),

@@ -747,6 +747,102 @@ Bundles are embedded resources accessible by Blazor interop via the bundle libra
 
 ## 4. Call NPM TypeScript</b><a name="4.4"></a><br>
 
+> In 'wwwroot' console execute command below to add threejs to package.json 
+```
+npm i three
+```
+
+> Create new 'wwwroot/src/cube.ts' file.<br>
+> Copy code to 'cube.js'.
+```JavaScript
+import * as THREE from 'three';
+
+export class Cube {
+    camera: THREE.PerspectiveCamera;
+    scene: THREE.Scene;
+    renderer: THREE.WebGLRenderer;
+    cube: any;
+
+    constructor() {
+        this.camera = new THREE.PerspectiveCamera(75, 2, .1, 5);
+        this.camera.position.z = 2;
+        let canvas = document.querySelector('#cube') as HTMLCanvasElement;
+        this.renderer = new THREE.WebGLRenderer({ canvas: canvas, alpha: true, antialias: true });
+        this.scene = new THREE.Scene();
+        this.scene.background = null;
+        const light = new THREE.DirectionalLight(0xFFFFFF, 1);
+        light.position.set(-1, 2, 4);
+        this.scene.add(light);
+
+        const geometry = new THREE.BoxGeometry(.5, .5, .5);
+        const loadManager = new THREE.LoadingManager();
+        const loader = new THREE.TextureLoader(loadManager);
+        const texMed = loader.load('images/3d.png');
+        const texPolice = loader.load('images/gorilla.png');
+        const texFire = loader.load('images/3d.png');
+
+        const matMed = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texMed, transparent: false, opacity: 1 });
+        const matPolice = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texPolice, transparent: false, opacity: 1 });
+        const matFire = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texFire, transparent: false, opacity: 1 });
+        const materials = [matMed, matPolice, matFire, matMed, matPolice, matFire];
+
+        loadManager.onLoad = () => {
+            this.cube = new THREE.Mesh(geometry, materials);
+            this.scene.add(this.cube);
+            this.animate();
+        };
+    }
+
+    animate(time = 0) {
+        time = performance.now() * 0.0005;
+        this.cube.rotation.x = time;
+        this.cube.rotation.y = time;
+        this.renderer.render(this.scene, this.camera);
+        requestAnimationFrame(this.animate.bind(this));
+    }
+
+    static Create(): number {
+        new Cube();
+        return screen.width;
+    }
+}
+```
+
+> Add cube entry to webpack.config.js like snippet below.
+
+```json
+    entry: {
+        index: ['./src/index'],
+        cube: ['./src/cube']
+    },
+```
+
+> Add 'cube-bundle.js' as static asset in 'Index.html'.
+
+```html
+<script src="public/cube-bundle.js"></script>
+```
+
+> Add cube canvas at end of 'Index.razor' html section.
+
+```html
+<canvas id="cube"/>
+```
+
+> Replace OnAfterRenderAsync in 'Index.razor' with below method with cube interop call.
+
+```c#
+protected override async Task OnAfterRenderAsync(bool firstRender)
+{
+    if (firstRender)
+    {
+        module = await JS.InvokeAsync<IJSObjectReference>("import", "./src/script.module.js" + Version);
+        hello = await JS.InvokeAsync<IJSObjectReference>("import", "./src/hello.js" + Version);
+        await JS.InvokeVoidAsync("cube.Cube.Create");
+    }
+}
+```
+
 ---
 
 <ul>
@@ -755,3 +851,5 @@ This section has covered calling TypeScript from Webpack bundles.
 </ul>
 
 ---
+
+(c) copyright 2021 Warren Browne
