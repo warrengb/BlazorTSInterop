@@ -4,7 +4,7 @@
 
 &nbsp;&nbsp;&nbsp;&nbsp;This is an article on Blazor Typescript Interop. 
 An elegant way to interface your Blazor C# WebAssembly (Wasm) with the browsers JavaScript API and libraries.
-Wasm can only communicate with the browser JavaScript API and can't reach outside the browser’s security sandbox.
+Wasm can only communicate with the browser JavaScript API and can't reach outside the browser security sandbox.
 Calling JavaScript from C# and vice-versa requires some thought. Leveraging TypeScript will guide better interop interface design.
 Discussion will contain a brief overview on the technology and variations of how to interop Blazor with TypeScript. 
 An implementation walkthrough will further explain by code example available on GitHub.
@@ -97,7 +97,7 @@ This demo will only use the home page.<br>
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
 <hr>
 ```
-```c#
+```csharp
 @code {
     string Message { get; set; } = "";
 
@@ -161,7 +161,7 @@ function ScriptAlert(message) {
 <button class="btn btn-primary" @onclick="@ScriptPrompt">Script Prompt</button>
 <button class="btn btn-primary" @onclick="@ScriptAlert">Script Alert</button><hr>
 ```
-```c#
+```csharp
 @code {
     string Message { get; set; } = "";
 
@@ -231,7 +231,7 @@ export function ModulAlert(message) {
 <button class="btn btn-primary" @onclick="@ModulelAlert">Module Alert</button>
 <hr>
 ```
-```c#
+```csharp
 @code {
     private IJSObjectReference module;
     string Message { get; set; } = "";
@@ -291,7 +291,7 @@ export function ModulAlert(message) {
 
 >Notice module appends an unique parameter Version tag when loaded:
 >
-```c#
+```csharp
 ...
 string Version { get { return "?v=" + DateTime.Now.Ticks.ToString(); } }
 ...
@@ -411,7 +411,7 @@ export var HelloInstance = new Hello();
 <h4 style="background-color:aliceblue; padding:20px">TypeScript Interop</h4><hr>
 <button class="btn btn-primary" @onclick="@HelloAlert">Hello Alert</button>
 ```
-```c#
+```csharp
 @code {
     private IJSObjectReference module;
     private IJSObjectReference hello;
@@ -501,14 +501,14 @@ This section has demonstrated TypeScript interop using the built in Visual Studi
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image15.png)
 
 > Execute command below to create package.json 
-```
+```PowerShell
 npm init -y
 ```
 &nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image16.png)
 
 > Execute command below to install webpack and typescript tools 
 > 
-```
+```PowerShell
 npm i ts-loader typescript webpack webpack-cli
 ```
 
@@ -702,7 +702,7 @@ Interop can only access exported items from the module.
 <button class="btn btn-primary" @onclick="@BundleIndexHello">Bundle Index Hello</button>
 ```
 > In 'Index.razor' code section add this as last method. 
-```c#
+```csharp
 async void BundleIndexHello()
 {
     await JS.InvokeVoidAsync("index.IndexInstance.hello");
@@ -721,7 +721,7 @@ async void BundleIndexHello()
 <button class="btn btn-primary" @onclick="@ReExportHello">ReExport Hello</button>
 ```
 > In 'Index.razor' code section add this as last method. 
-```c#
+```csharp
 async void ReExportHello()
 {
     await JS.InvokeVoidAsync("index.HelloInstance.hello");
@@ -748,13 +748,13 @@ Bundles are embedded resources accessible by Blazor interop via the bundle libra
 ## 4. Call NPM TypeScript</b><a name="4.4"></a><br>
 
 > In 'wwwroot' console execute command below to add threejs to package.json 
-```
+```PowerShell
 npm i three
 ```
 
 > Create new 'wwwroot/src/cube.ts' file.<br>
 > Copy code to 'cube.js'.
-```JavaScript
+```TypeScript
 import * as THREE from 'three';
 
 export class Cube {
@@ -841,7 +841,7 @@ export class Cube {
 
 > Replace OnAfterRenderAsync in 'Index.razor' with below method with cube interop call.
 
-```c#
+```csharp
 protected override async Task OnAfterRenderAsync(bool firstRender)
 {
     if (firstRender)

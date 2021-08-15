@@ -364,3 +364,4 @@ FodyWeavers.xsd
 *.js
 *.map
 /wwwroot/public
+/README.html
