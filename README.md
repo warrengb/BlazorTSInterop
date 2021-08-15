@@ -774,17 +774,17 @@ export class Cube {
         light.position.set(-1, 2, 4);
         this.scene.add(light);
 
-        const geometry = new THREE.BoxGeometry(.5, .5, .5);
+        const geometry = new THREE.BoxGeometry(1, 1, 1);
         const loadManager = new THREE.LoadingManager();
         const loader = new THREE.TextureLoader(loadManager);
-        const texMed = loader.load('images/3d.png');
-        const texPolice = loader.load('images/gorilla.png');
-        const texFire = loader.load('images/3d.png');
+        const texBlazor = loader.load('images/blazor.png');
+        const texInterop = loader.load('images/interop.png');
+        const texCircle = loader.load('images/tscircle.png');
 
-        const matMed = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texMed, transparent: false, opacity: 1 });
-        const matPolice = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texPolice, transparent: false, opacity: 1 });
-        const matFire = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texFire, transparent: false, opacity: 1 });
-        const materials = [matMed, matPolice, matFire, matMed, matPolice, matFire];
+        const matBlazor = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texBlazor, transparent: false, opacity: 1 });
+        const matInterop = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texInterop, transparent: false, opacity: 1 });
+        const matCircle = new THREE.MeshPhongMaterial({ color: 0xffffff, map: texCircle, transparent: false, opacity: 1 });
+        const materials = [matBlazor, matInterop, matCircle, matBlazor, matInterop, matCircle];
 
         loadManager.onLoad = () => {
             this.cube = new THREE.Mesh(geometry, materials);
@@ -801,12 +801,22 @@ export class Cube {
         requestAnimationFrame(this.animate.bind(this));
     }
 
-    static Create(): number {
+    static Create(): void {
         new Cube();
-        return screen.width;
     }
 }
 ```
+
+> Create 'images' sub folder in 'wwwroot'. 
+>  
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image22.png)
+
+> Add these images.
+> 
+![ScreenShot](readme/tsinterop.png)
+![ScreenShot](readme/blazor.png) 
+![ScreenShot](readme/interop.png) 
+![ScreenShot](readme/tscircle.png)
 
 > Add cube entry to webpack.config.js like snippet below.
 
@@ -843,11 +853,15 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 }
 ```
 
+> Build and run. 
+>  
+&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image23.png)
+
 ---
 
 <ul>
 <b>Summary</b><br>
-This section has covered calling TypeScript from Webpack bundles.
+This section has covered Blazor calling a TypeScript class that uses NPM three.js library.
 </ul>
 
 ---
