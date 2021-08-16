@@ -1,19 +1,28 @@
 
 # Blazor Typescript Interop
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/tsinterop.png)
+&emsp;![ScreenShot](readme/tsinterop.png)
 
-&nbsp;&nbsp;&nbsp;&nbsp;This is an article on Blazor Typescript Interop. 
-An elegant way to interface your Blazor C# WebAssembly (Wasm) with the browsers JavaScript API and libraries.
-Wasm can only communicate with the browser JavaScript API and can't reach outside the browser security sandbox.
-Calling JavaScript from C# and vice-versa requires some thought. Leveraging TypeScript will guide better interop interface design.
+&emsp;&emsp;
+Blazor Typescript Interop is an elegant way to interface your 
+Blazor C# WebAssembly (Wasm) with the browsers JavaScript API and JavaScript libraries.
+Interop is neccessary because Wasm can't reach outside the browser security sandbox. 
+There is no access to the browser JavaScript API.
+<br>&emsp;&emsp;
+The title of this article may be mis-leading. 
+It should technically read: 'Blazer Interop with the transpiled TypeScript resulting JavaScript'.
+Since the browser interpreter engine does not know about TypeScript. 
+For simplicity sakes, TypeScript mentioned here means the JavaScript transpiled result.
+Calling TypeScript from C# and vice-versa requires some thought.
+Leveraging TypeScript will guide better interop interface design.
+<br>&emsp;&emsp;
 Discussion will contain a brief overview on the technology and variations of how to interop Blazor with TypeScript. 
-An implementation walkthrough will further explain by code example available on GitHub.
-Walkthrough starts off with plain old JavaScript, then progresses to TypeScript and TypeScript utilizing NPM library.
-For more information on Blazor Interop see 
+An implementation style walkthrough will further explain by code example available on GitHub. https://github.com/warrengb/BazorTSInterop
+<br>&emsp;&emsp;Walkthrough starts off with plain old JavaScript, then progresses to TypeScript and TypeScript utilizing NPM library.
+For furhter information on Blazor Interop see:<br>
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
   
 ***     
-#### Table of Contents
+## Table of Contents
 1. [Create Blazor Project](#1)<br>
 2. [Implement JavaScript Interop](#2)<br>
     1. [Call JavaScript Browser API](#2.1)<br>
@@ -26,10 +35,11 @@ For more information on Blazor Interop see
     3. [Call Webpack TypeScript](#4.3)<br>
     4. [Call NPM TypeScript](#4.4)
 
-***     
+***
+***
 
 ![ScreenShot](readme/blazor.png)
-&nbsp;&nbsp;&nbsp;&nbsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
+&emsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
 Wasm coded in C#. Blazor is an attractive alternative to Angular, React, Vue and other JavaScript SPA website architectures for the .NET developer.
 Blazor MAUI, a continuation of Xamarin with Blazor webview is another great addition to the .NET stack that completes a .NET developer ecosystem for device and browser applications.
 
@@ -39,7 +49,7 @@ TypeScript transpiles to JavaScript, so references to JavaScript going forward i
 Using Typescript will benefit Blazer interop code designs. Especially in the are of structural design patterns like facades, adapters and bridges.
 
 ![ScreenShot](readme/interop.png)
-&nbsp;&nbsp;&nbsp;&nbsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
+&emsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
 The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# needs JavaScript interop.
 Existing Blazor .NET libraries for the browser, such as the C# WebSocket class, are JavaScript interop wrappers.
@@ -111,7 +121,7 @@ This demo will only use the home page.<br>
 ```
 > Save to run in hot reload mode and test.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image4.png)
+&emsp;![ScreenShot](readme/image4.png)
 
 ---
 
@@ -120,7 +130,7 @@ This demo will only use the home page.<br>
 > Create new 'src' folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
  
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image5.png)
+&emsp;![ScreenShot](readme/image5.png)
 
 > Copy code to 'script.js'.
 ```JavaScript
@@ -190,12 +200,12 @@ function ScriptAlert(message) {
 
 >Run and test.
  
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image6.png)
+&emsp;![ScreenShot](readme/image6.png)
 
 #### 3. Call Isolated JavaScript</b><a name="2.3"></a>
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image7.png)
+&emsp;![ScreenShot](readme/image7.png)
 
 > Copy code to 'script.module.js'.
 
@@ -309,7 +319,7 @@ script.module.js avoids cached by unique param tag.
 
 >Build and run.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image8.png)
+&emsp;![ScreenShot](readme/image8.png)
 
 ---
 
@@ -366,7 +376,7 @@ It is recommended to do a debug code walkthrough to see the interop in action.
 
 > Create new 'wwwroot/src/hello.ts' TypeScript file.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image9.png)
+&emsp;![ScreenShot](readme/image9.png)
 
 > Copy code to 'hello.ts'.<br>
 > Note class methods access ScriptAlert from embedded 'script.js'
@@ -389,11 +399,11 @@ export var HelloInstance = new Hello();
 
 > Include Microsoft.TypeScript.MSBuild from Nuget Package Manager.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image11.png)
+&emsp;![ScreenShot](readme/image11.png)
 
 > Set Version:ECMAScript, TSX:None, Module:ES2015 in Project/Properties/Typescript Build
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image12.png)
+&emsp;![ScreenShot](readme/image12.png)
 
 > Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
 ```html
@@ -478,7 +488,7 @@ export var HelloInstance = new Hello();
 
 > Build, Run and test Hello Alert.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image13.png)
+&emsp;![ScreenShot](readme/image13.png)
 
 ---
 
@@ -498,13 +508,13 @@ This section has demonstrated TypeScript interop using the built in Visual Studi
 > > 
 > This opens a PowerShell terminal window in editor.<br>
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image15.png)
+&emsp;![ScreenShot](readme/image15.png)
 
 > Execute command below to create package.json 
 ```PowerShell
 npm init -y
 ```
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image16.png)
+&emsp;![ScreenShot](readme/image16.png)
 
 > Execute command below to install webpack and typescript tools 
 > 
@@ -512,7 +522,7 @@ npm init -y
 npm i ts-loader typescript webpack webpack-cli
 ```
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image17.png)
+&emsp;![ScreenShot](readme/image17.png)
 
 > Add scripts entry "build": "webpack" in 'package.json'<br>
 > Or replace 'package.json' with json contents below.
@@ -632,7 +642,7 @@ module.exports = {
 > No harm done leaving it in for this demo.<br>
 > Or you can select and delete to remove.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image21.png)
+&emsp;![ScreenShot](readme/image21.png)
 
 ---
 
@@ -647,7 +657,7 @@ This section has covered preparing a Blazor project with Webpack toolset for cre
 
 > Create new 'wwwroot/src/index.ts' TypeScript file.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image14.png)
+&emsp;![ScreenShot](readme/image14.png)
 
 > Copy code to 'index.ts'.<br>
 > Index class is a Hello class wrapper.<br>
@@ -671,7 +681,7 @@ export var IndexInstance = new Index()
 
 > Build CTRL+Shift+B creates 'index.js' and 'index_bundle.js' in the 'public' directory.
 > 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image18.png)
+&emsp;![ScreenShot](readme/image18.png)
 
 ---
 
@@ -711,7 +721,7 @@ async void BundleIndexHello()
 ```
 > Build and run.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image19.png)
+&emsp;![ScreenShot](readme/image19.png)
 
 > Bundle Index Hello button demonstrates calling Index class methods exported from 'index' library 
 
@@ -730,7 +740,7 @@ async void ReExportHello()
 ```
 > Build and run.
 
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image20.png)
+&emsp;![ScreenShot](readme/image20.png)
 
 > ReExport Hello button demonstrates calling Hello class methods exported from 'index' library 
 
@@ -809,7 +819,7 @@ export class Cube {
 
 > Create 'images' sub folder in 'wwwroot'. 
 >  
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image22.png)
+&emsp;![ScreenShot](readme/image22.png)
 
 > Add these images.
 > 
@@ -855,7 +865,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 > Build and run. 
 >  
-&nbsp;&nbsp;&nbsp;&nbsp;![ScreenShot](readme/image23.png)
+&emsp;![ScreenShot](readme/image23.png)
 
 ---
 
