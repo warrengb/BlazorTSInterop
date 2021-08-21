@@ -35,8 +35,7 @@ For furhter information on Blazor Interop see:<br>
     3. [Call Webpack TypeScript](#4.3)<br>
     4. [Call NPM TypeScript](#4.4)
 
-***
-***
+---
 
 ![ScreenShot](readme/blazor.png)
 &emsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
@@ -45,14 +44,14 @@ Blazor MAUI, a continuation of Xamarin with Blazor webview is another great addi
 
 ![ScreenShot](readme/tscircle.png)
 **TypeScript** is a superset of JavaScript for application-scale development featuring strong types and geared for object-oriented programming.
-TypeScript transpiles to JavaScript, so references to JavaScript going forward is either plain old JavaScript or the result of transpiled TypeScript to JavaScript consumable by the browser.
+TypeScript transpiles to JavaScript. Going forward in this article, in the scope of interop, JavaScript and TypeScript implies the result of transpiled TypeScript to JavaScript.
 Using Typescript will benefit Blazer interop code designs. Especially in the are of structural design patterns like facades, adapters and bridges.
 
 ![ScreenShot](readme/interop.png)
 &emsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
-The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# needs JavaScript interop.
-Existing Blazor .NET libraries for the browser, such as the C# WebSocket class, are JavaScript interop wrappers.
+The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# requires JavaScript interop.
+Blazor .NET libraries for the browser are JavaScript interop wrappers. For example: the Blazor version of C# WebSocket class is an interop wrapper.  
 
 ---
 
@@ -821,14 +820,15 @@ export class Cube {
 >  
 &emsp;![ScreenShot](readme/image22.png)
 
-> Add these images.
+> Download and add these to the 'images' folder.
 > 
 ![ScreenShot](readme/tsinterop.png)
 ![ScreenShot](readme/blazor.png) 
 ![ScreenShot](readme/interop.png) 
 ![ScreenShot](readme/tscircle.png)
 
-> Add cube entry to webpack.config.js like snippet below.
+> Add cube entry to webpack.config.js  
+> Replace entry: section with snippet below.
 
 ```json
     entry: {
