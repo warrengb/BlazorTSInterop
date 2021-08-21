@@ -33,8 +33,8 @@ For furhter information on Blazor Interop see:<br>
     1. [Call Isolated TypeScript](#4.1)<br>
     2. [Setup Webpack Build Pipeline](#4.2)<br>
     3. [Call Webpack TypeScript](#4.3)<br>
-    4. [Call NPM TypeScript](#4.4)
-
+    4. [Call NPM TypeScript](#4.4)<br>
+5. [Interop Software Design](#5)
 ---
 
 ![ScreenShot](readme/blazor.png)
@@ -61,7 +61,7 @@ Lets get started.
 
 ---
 
-## Part 1 Create Blazor Project<a name="1"></a>
+## Part 1. Create Blazor Project<a name="1"></a>
 ###### To start off we will just create a new Blazor app.
 
 
@@ -876,4 +876,13 @@ This section has covered Blazor calling a TypeScript class that uses NPM three.j
 
 ---
 
-(c) copyright 2021 Warren Browne
+## Part 4. Interop Software Design<a name="5"></a>
+### Leveraging TypeScript benefits interop software design.<br> Typically Structural Design Patterns.
+###### TOP: Blazor C# class encapsulates C# interop methods that align to TypeScript counterpart. 
+###### LEFT: TypeScript transpiles to browser JavaScript ready to interop.
+###### RIGHT: Blazor C# compiles to Wasm browser ready to execute. 
+###### BOTTOM: Blazor Wasm speaks to browser through interop ready JavaScript.
+
+![ScreenShot](readme/designs.svg)
+
+&copy; Copyright 2021 Warren Browne  
