@@ -15,7 +15,7 @@ Calling TypeScript from C# and vice-versa requires some thought.
 Leveraging TypeScript will guide better interop interface design.
 <br>&emsp;&emsp;
 Discussion will contain a brief overview on the technology and variations of how to interop Blazor with TypeScript. 
-An implementation style walkthrough will further explain by code example available on GitHub. https://github.com/warrengb/BazorTSInterop
+An implementation style walkthrough will further explain by code example available on GitHub. https://github.com/warrengb/BlazorTSInterop
 <br>&emsp;&emsp;Walkthrough starts off with plain old JavaScript, then progresses to TypeScript and TypeScript utilizing NPM library.
 For furhter information on Blazor Interop see:<br>
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
@@ -876,7 +876,7 @@ This section has covered Blazor calling a TypeScript class that uses NPM three.j
 ---
 
 ## Part 4. Interop Software Design<a name="5"></a>
-### Leveraging TypeScript benefits interop software design.<br> Typically Structural Design Patterns.
+### Leveraging TypeScript benefits interop software design.<br><span style="font-weight: 100;">Typically Structural Design Patterns.</span>
 
 > TypeScript transpiles to browser JavaScript ready to interop.  
 > Bazor C# compiles to Wasm browser ready to execute. 

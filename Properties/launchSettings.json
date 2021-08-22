@@ -16,7 +16,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "BazorTSInterop": {
+    "BlazorTSInterop": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BazorTSInterop", "BazorTSInterop.csproj", "{EF7CB628-F4D2-4727-923A-7E28BC01BEB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorTSInterop", "BlazorTSInterop.csproj", "{EF7CB628-F4D2-4727-923A-7E28BC01BEB6}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "readme", "readme", "{56FD2724-F92E-4B33-B813-8D42E373C4FE}"
 	ProjectSection(SolutionItems) = preProject
