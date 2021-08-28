@@ -879,7 +879,7 @@ This section has covered Blazor calling a TypeScript class that uses NPM three.j
 ### Leveraging TypeScript benefits interop software design.<br><span style="font-weight: 100;">Typically Structural Design Patterns.</span>
 
 > TypeScript transpiles to browser JavaScript ready to interop.  
-> Bazor C# compiles to Wasm browser ready to execute. 
+> Blazor C# compiles to Wasm browser ready to execute. 
 
 ###### &emsp;&emsp;&bull; Blazor C# interop interface design aligns with TypeScript counterpart. 
 ![ScreenShot](readme/designs.svg)
