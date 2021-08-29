@@ -74,6 +74,8 @@
     <None Include="wwwroot\images\image7.png" />
     <None Include="wwwroot\images\image8.png" />
     <None Include="wwwroot\images\image9.png" />
+    <None Include="wwwroot\readme\md-styles.css" />
+    <None Include="wwwroot\readme\prism.css" />
   </ItemGroup>
 
   <ItemGroup>
