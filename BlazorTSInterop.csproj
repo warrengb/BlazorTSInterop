@@ -13,38 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\images\debug1.png" />
-    <Content Remove="wwwroot\images\debug2.png" />
-    <Content Remove="wwwroot\images\debug3.png" />
-    <Content Remove="wwwroot\images\debug4.png" />
-    <Content Remove="wwwroot\images\designs.svg" />
-    <Content Remove="wwwroot\images\image0.png" />
-    <Content Remove="wwwroot\images\image1.png" />
-    <Content Remove="wwwroot\images\image10.png" />
-    <Content Remove="wwwroot\images\image11.png" />
-    <Content Remove="wwwroot\images\image12.png" />
-    <Content Remove="wwwroot\images\image13.png" />
-    <Content Remove="wwwroot\images\image14.png" />
-    <Content Remove="wwwroot\images\image15.png" />
-    <Content Remove="wwwroot\images\image16.png" />
-    <Content Remove="wwwroot\images\image17.png" />
-    <Content Remove="wwwroot\images\image18.png" />
-    <Content Remove="wwwroot\images\image19.png" />
-    <Content Remove="wwwroot\images\image2.png" />
-    <Content Remove="wwwroot\images\image20.png" />
-    <Content Remove="wwwroot\images\image21.png" />
-    <Content Remove="wwwroot\images\image22.png" />
-    <Content Remove="wwwroot\images\image23.png" />
-    <Content Remove="wwwroot\images\image3.png" />
-    <Content Remove="wwwroot\images\image4.png" />
-    <Content Remove="wwwroot\images\image5.png" />
-    <Content Remove="wwwroot\images\image6.png" />
-    <Content Remove="wwwroot\images\image7.png" />
-    <Content Remove="wwwroot\images\image8.png" />
-    <Content Remove="wwwroot\images\image9.png" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="wwwroot\images\debug1.png" />
     <None Include="wwwroot\images\debug2.png" />
     <None Include="wwwroot\images\debug3.png" />
@@ -74,8 +42,13 @@
     <None Include="wwwroot\images\image7.png" />
     <None Include="wwwroot\images\image8.png" />
     <None Include="wwwroot\images\image9.png" />
+    <None Include="wwwroot\images\blazor.png" />
+    <None Include="wwwroot\images\interop.png" />
+    <None Include="wwwroot\images\tscircle.png" />
+    <None Include="wwwroot\images\tsinterop.png" />
     <None Include="wwwroot\readme\md-styles.css" />
     <None Include="wwwroot\readme\prism.css" />
+    <None Include="wwwroot\readme\prism.js" />
   </ItemGroup>
 
   <ItemGroup>
