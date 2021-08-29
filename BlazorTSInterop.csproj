@@ -13,6 +13,70 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\images\debug1.png" />
+    <Content Remove="wwwroot\images\debug2.png" />
+    <Content Remove="wwwroot\images\debug3.png" />
+    <Content Remove="wwwroot\images\debug4.png" />
+    <Content Remove="wwwroot\images\designs.svg" />
+    <Content Remove="wwwroot\images\image0.png" />
+    <Content Remove="wwwroot\images\image1.png" />
+    <Content Remove="wwwroot\images\image10.png" />
+    <Content Remove="wwwroot\images\image11.png" />
+    <Content Remove="wwwroot\images\image12.png" />
+    <Content Remove="wwwroot\images\image13.png" />
+    <Content Remove="wwwroot\images\image14.png" />
+    <Content Remove="wwwroot\images\image15.png" />
+    <Content Remove="wwwroot\images\image16.png" />
+    <Content Remove="wwwroot\images\image17.png" />
+    <Content Remove="wwwroot\images\image18.png" />
+    <Content Remove="wwwroot\images\image19.png" />
+    <Content Remove="wwwroot\images\image2.png" />
+    <Content Remove="wwwroot\images\image20.png" />
+    <Content Remove="wwwroot\images\image21.png" />
+    <Content Remove="wwwroot\images\image22.png" />
+    <Content Remove="wwwroot\images\image23.png" />
+    <Content Remove="wwwroot\images\image3.png" />
+    <Content Remove="wwwroot\images\image4.png" />
+    <Content Remove="wwwroot\images\image5.png" />
+    <Content Remove="wwwroot\images\image6.png" />
+    <Content Remove="wwwroot\images\image7.png" />
+    <Content Remove="wwwroot\images\image8.png" />
+    <Content Remove="wwwroot\images\image9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\images\debug1.png" />
+    <None Include="wwwroot\images\debug2.png" />
+    <None Include="wwwroot\images\debug3.png" />
+    <None Include="wwwroot\images\debug4.png" />
+    <None Include="wwwroot\images\designs.svg" />
+    <None Include="wwwroot\images\image0.png" />
+    <None Include="wwwroot\images\image1.png" />
+    <None Include="wwwroot\images\image10.png" />
+    <None Include="wwwroot\images\image11.png" />
+    <None Include="wwwroot\images\image12.png" />
+    <None Include="wwwroot\images\image13.png" />
+    <None Include="wwwroot\images\image14.png" />
+    <None Include="wwwroot\images\image15.png" />
+    <None Include="wwwroot\images\image16.png" />
+    <None Include="wwwroot\images\image17.png" />
+    <None Include="wwwroot\images\image18.png" />
+    <None Include="wwwroot\images\image19.png" />
+    <None Include="wwwroot\images\image2.png" />
+    <None Include="wwwroot\images\image20.png" />
+    <None Include="wwwroot\images\image21.png" />
+    <None Include="wwwroot\images\image22.png" />
+    <None Include="wwwroot\images\image23.png" />
+    <None Include="wwwroot\images\image3.png" />
+    <None Include="wwwroot\images\image4.png" />
+    <None Include="wwwroot\images\image5.png" />
+    <None Include="wwwroot\images\image6.png" />
+    <None Include="wwwroot\images\image7.png" />
+    <None Include="wwwroot\images\image8.png" />
+    <None Include="wwwroot\images\image9.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="5.0.9" />
     <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="5.0.9" PrivateAssets="all" />
     <PackageReference Include="Microsoft.TypeScript.MSBuild" Version="4.4.2">
