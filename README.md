@@ -1,5 +1,5 @@
 # Blazor Typescript Interop
-&emsp;![ScreenShot](wwwroot/images/tsinterop.png)
+&emsp;![ScreenShot](readme/tsinterop.png)
 
 &emsp;&emsp;
 Blazor Typescript Interop is an elegant way to interface your 
@@ -15,7 +15,7 @@ Calling TypeScript from C# and vice-versa requires some thought.
 Leveraging TypeScript will guide better interop interface design.
 <br>&emsp;&emsp;
 Discussion will contain a brief overview on the technology and variations of how to interop Blazor with TypeScript. 
-An implementation style walkthrough will further explain by code example available on GitHub. https://github.com/warrengb/BlazorTSInterop
+An implementation style walkthrough will further explain by code example available on GitHub.
 <br>&emsp;&emsp;Walkthrough starts off with plain old JavaScript, then progresses to TypeScript and TypeScript utilizing NPM library.
 For furhter information on Blazor Interop see:<br>
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
@@ -36,17 +36,22 @@ For furhter information on Blazor Interop see:<br>
 5. [Interop Software Design](#5)
 ---
 
-![ScreenShot](wwwroot/images/blazor.png)
+###### Document http://trog.net/readme/BlazorTSInterop 
+###### GitHub https://github.com/warrengb/BlazorTSInterop  
+###### Demo http://trog.net/BlazorTSInterop
+---
+
+![ScreenShot](readme/blazor.png)
 &emsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
 Wasm coded in C#. Blazor is an attractive alternative to Angular, React, Vue and other JavaScript SPA website architectures for the .NET developer.
 Blazor MAUI, a continuation of Xamarin with Blazor webview is another great addition to the .NET stack that completes a .NET developer ecosystem for device and browser applications.
 
-![ScreenShot](wwwroot/images/tscircle.png)
+![ScreenShot](readme/tscircle.png)
 **TypeScript** is a superset of JavaScript for application-scale development featuring strong types and geared for object-oriented programming.
 TypeScript transpiles to JavaScript. Going forward in this article, in the scope of interop, JavaScript and TypeScript implies the result of transpiled TypeScript to JavaScript.
 Using Typescript will benefit Blazer interop code designs. Especially in the are of structural design patterns like facades, adapters and bridges.
 
-![ScreenShot](wwwroot/images/interop.png)
+![ScreenShot](readme/interop.png)
 &emsp;**Interop** is an interface between a higher level coding language to a lower level language, typically the native language of the platform.
 Data elements and procedures can be interchanged between the two languages. Blazor out of the box uses interop to communicate with the browser.
 The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# requires JavaScript interop.
@@ -66,19 +71,19 @@ Lets get started.
 
 > Create new Blazor WebAssembly App.
 > 
-![ScreenShot](wwwroot/images/image0.png)
+![ScreenShot](readme/image0.png)
 
 >  Name it BlazerTSInterop in directory of your choice.
 >  
-![ScreenShot](wwwroot/images/image1.png)
+![ScreenShot](readme/image1.png)
 
 >  Use .NET 5.0 client only, No security and no PWA.
 >  
-![ScreenShot](wwwroot/images/image2.png)
+![ScreenShot](readme/image2.png)
 
 >  CTRL+F5 build and run in hot reload mode.
 
-![ScreenShot](wwwroot/images/image3.png)
+![ScreenShot](readme/image3.png)
 
 ---
 
@@ -119,7 +124,7 @@ This demo will only use the home page.<br>
 ```
 > Save to run in hot reload mode and test.
 
-&emsp;![ScreenShot](wwwroot/images/image4.png)
+&emsp;![ScreenShot](readme/image4.png)
 
 ---
 
@@ -128,7 +133,7 @@ This demo will only use the home page.<br>
 > Create new 'src' folder for JavaScript and Typescript files.<br>
 > Create new 'wwwroot/src/script.js' file.
  
-&emsp;![ScreenShot](wwwroot/images/image5.png)
+&emsp;![ScreenShot](readme/image5.png)
 
 > Copy code to 'script.js'.
 ```JavaScript
@@ -198,12 +203,12 @@ function ScriptAlert(message) {
 
 >Run and test.
  
-&emsp;![ScreenShot](wwwroot/images/image6.png)
+&emsp;![ScreenShot](readme/image6.png)
 
 #### 3. Call Isolated JavaScript</b><a name="2.3"></a>
 > Create new 'wwwroot/src/script.module.js' JavaScript file.
 
-&emsp;![ScreenShot](wwwroot/images/image7.png)
+&emsp;![ScreenShot](readme/image7.png)
 
 > Copy code to 'script.module.js'.
 
@@ -310,14 +315,14 @@ module = await JS.InvokeAsync<IJSObjectReference>
 >
 script.module.js avoids cached by unique param tag. 
 
-![ScreenShot](wwwroot/images/image10.png)<br>
+![ScreenShot](readme/image10.png)<br>
 > This is a hack to bypass the browser cache which may stick during development.<br>
 > To regain cache performance <b>Version</b> value can be replaced by an application release version number.
 > Which will then force a cache refresh once at first client run of new release.   
 
 >Build and run.
 
-&emsp;![ScreenShot](wwwroot/images/image8.png)
+&emsp;![ScreenShot](readme/image8.png)
 
 ---
 
@@ -338,25 +343,25 @@ A precursor to calling TypeScript interop from Blazor.
 >Here are some situations and workarounds that may help.<br>
 
 Set breakpoint in script.js as shown.<br>
-![ScreenShot](wwwroot/images/debug3.png)<br>
+![ScreenShot](readme/debug3.png)<br>
 
 Run application in debug mode F5.<br>
 The debugger is not attached if the breakpoint red circle is hollow.<br>
-![ScreenShot](wwwroot/images/debug1.png)<br>
+![ScreenShot](readme/debug1.png)<br>
 
 You can see the cached file in Script Document folders.<br>
 Click on file to see if cached contents are from a prior version.<br>
-![ScreenShot](wwwroot/images/debug2.png)<br>
+![ScreenShot](readme/debug2.png)<br>
 
 Try removing the breakpoint and re-apply.<br>
 The debugger may re-attach.<br>
-![ScreenShot](wwwroot/images/debug3.png)<br>
+![ScreenShot](readme/debug3.png)<br>
 
 While app is running, press CTR+Shift+I in browser to view developer tools.<br>
 Select src/script.js in Sources panel and set breakpoint at shown.<br>
 This will trigger Visual Studio debugger re-attachment to Chrome.<br>
 If this does not work, debugging in Chrome will suffice.<br>
-![ScreenShot](wwwroot/images/debug4.png)<br>
+![ScreenShot](readme/debug4.png)<br>
 
 ---
 
@@ -374,7 +379,7 @@ It is recommended to do a debug code walkthrough to see the interop in action.
 
 > Create new 'wwwroot/src/hello.ts' TypeScript file.
 
-&emsp;![ScreenShot](wwwroot/images/image9.png)
+&emsp;![ScreenShot](readme/image9.png)
 
 > Copy code to 'hello.ts'.<br>
 > Note class methods access ScriptAlert from embedded 'script.js'
@@ -397,11 +402,11 @@ export var HelloInstance = new Hello();
 
 > Include Microsoft.TypeScript.MSBuild from Nuget Package Manager.
 
-&emsp;![ScreenShot](wwwroot/images/image11.png)
+&emsp;![ScreenShot](readme/image11.png)
 
 > Set Version:ECMAScript, TSX:None, Module:ES2015 in Project/Properties/Typescript Build
 
-&emsp;![ScreenShot](wwwroot/images/image12.png)
+&emsp;![ScreenShot](readme/image12.png)
 
 > Replace all of 'Index.razor' contents with following code snippets respectfully to add Module buttons and methods. 
 ```html
@@ -486,7 +491,7 @@ export var HelloInstance = new Hello();
 
 > Build, Run and test Hello Alert.
 
-&emsp;![ScreenShot](wwwroot/images/image13.png)
+&emsp;![ScreenShot](readme/image13.png)
 
 ---
 
@@ -506,13 +511,13 @@ This section has demonstrated TypeScript interop using the built in Visual Studi
 > > 
 > This opens a PowerShell terminal window in editor.<br>
 
-&emsp;![ScreenShot](wwwroot/images/image15.png)
+&emsp;![ScreenShot](readme/image15.png)
 
 > Execute command below to create package.json 
 ```PowerShell
 npm init -y
 ```
-&emsp;![ScreenShot](wwwroot/images/image16.png)
+&emsp;![ScreenShot](readme/image16.png)
 
 > Execute command below to install webpack and typescript tools 
 > 
@@ -520,7 +525,7 @@ npm init -y
 npm i ts-loader typescript webpack webpack-cli
 ```
 
-&emsp;![ScreenShot](wwwroot/images/image17.png)
+&emsp;![ScreenShot](readme/image17.png)
 
 > Add scripts entry "build": "webpack" in 'package.json'<br>
 > Or replace 'package.json' with json contents below.
@@ -640,7 +645,7 @@ module.exports = {
 > No harm done leaving it in for this demo.<br>
 > Or you can select and delete to remove.
 
-&emsp;![ScreenShot](wwwroot/images/image21.png)
+&emsp;![ScreenShot](readme/image21.png)
 
 ---
 
@@ -655,7 +660,7 @@ This section has covered preparing a Blazor project with Webpack toolset for cre
 
 > Create new 'wwwroot/src/index.ts' TypeScript file.
 
-&emsp;![ScreenShot](wwwroot/images/image14.png)
+&emsp;![ScreenShot](readme/image14.png)
 
 > Copy code to 'index.ts'.<br>
 > Index class is a Hello class wrapper.<br>
@@ -679,7 +684,7 @@ export var IndexInstance = new Index()
 
 > Build CTRL+Shift+B creates 'index.js' and 'index_bundle.js' in the 'public' directory.
 > 
-&emsp;![ScreenShot](wwwroot/images/image18.png)
+&emsp;![ScreenShot](readme/image18.png)
 
 ---
 
@@ -719,7 +724,7 @@ async void BundleIndexHello()
 ```
 > Build and run.
 
-&emsp;![ScreenShot](wwwroot/images/image19.png)
+&emsp;![ScreenShot](readme/image19.png)
 
 > Bundle Index Hello button demonstrates calling Index class methods exported from 'index' library 
 
@@ -738,7 +743,7 @@ async void ReExportHello()
 ```
 > Build and run.
 
-&emsp;![ScreenShot](wwwroot/images/image20.png)
+&emsp;![ScreenShot](readme/image20.png)
 
 > ReExport Hello button demonstrates calling Hello class methods exported from 'index' library 
 
@@ -817,14 +822,14 @@ export class Cube {
 
 > Create 'images' sub folder in 'wwwroot'. 
 >  
-&emsp;![ScreenShot](wwwroot/images/image22.png)
+&emsp;![ScreenShot](readme/image22.png)
 
 > Download and add these to the 'images' folder.
 > 
-![ScreenShot](wwwroot/images/tsinterop.png)
-![ScreenShot](wwwroot/images/blazor.png) 
-![ScreenShot](wwwroot/images/interop.png) 
-![ScreenShot](wwwroot/images/tscircle.png)
+![ScreenShot](readme/tsinterop.png)
+![ScreenShot](readme/blazor.png) 
+![ScreenShot](readme/interop.png) 
+![ScreenShot](readme/tscircle.png)
 
 > Add cube entry to webpack.config.js  
 > Replace entry: section with snippet below.
@@ -864,7 +869,7 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 
 > Build and run. 
 >  
-&emsp;![ScreenShot](wwwroot/images/image23.png)
+&emsp;![ScreenShot](readme/image23.png)
 
 ---
 
@@ -881,7 +886,7 @@ This section has covered Blazor calling a TypeScript class that uses NPM three.j
 > TypeScript transpiles to browser JavaScript ready to interop.  
 > Blazor C# compiles to Wasm browser ready to execute. 
 
-###### &emsp;&emsp;&bull; Blazor C# interop interface design aligns with TypeScript counterpart. 
-![ScreenShot](wwwroot/images/designs.svg)
-###### &emsp;&emsp;&bull; Blazor Wasm speaks to browser through interop ready JavaScript.
+###### &emsp;Blazor C# interface design aligns with TypeScript counterpart. 
+![ScreenShot](readme/designs.svg)
+######  &nbsp;Blazor Wasm speaks to browser through interop ready JavaScript.
 &copy; Copyright 2021 Warren Browne  

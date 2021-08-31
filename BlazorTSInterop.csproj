@@ -13,42 +13,45 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\debug1.png" />
-    <None Include="wwwroot\images\debug2.png" />
-    <None Include="wwwroot\images\debug3.png" />
-    <None Include="wwwroot\images\debug4.png" />
-    <None Include="wwwroot\images\designs.svg" />
-    <None Include="wwwroot\images\image0.png" />
-    <None Include="wwwroot\images\image1.png" />
-    <None Include="wwwroot\images\image10.png" />
-    <None Include="wwwroot\images\image11.png" />
-    <None Include="wwwroot\images\image12.png" />
-    <None Include="wwwroot\images\image13.png" />
-    <None Include="wwwroot\images\image14.png" />
-    <None Include="wwwroot\images\image15.png" />
-    <None Include="wwwroot\images\image16.png" />
-    <None Include="wwwroot\images\image17.png" />
-    <None Include="wwwroot\images\image18.png" />
-    <None Include="wwwroot\images\image19.png" />
-    <None Include="wwwroot\images\image2.png" />
-    <None Include="wwwroot\images\image20.png" />
-    <None Include="wwwroot\images\image21.png" />
-    <None Include="wwwroot\images\image22.png" />
-    <None Include="wwwroot\images\image23.png" />
-    <None Include="wwwroot\images\image3.png" />
-    <None Include="wwwroot\images\image4.png" />
-    <None Include="wwwroot\images\image5.png" />
-    <None Include="wwwroot\images\image6.png" />
-    <None Include="wwwroot\images\image7.png" />
-    <None Include="wwwroot\images\image8.png" />
-    <None Include="wwwroot\images\image9.png" />
+    <Content Include="readme\debug1.png" />
+    <Content Include="readme\debug2.png" />
+    <Content Include="readme\debug3.png" />
+    <Content Include="readme\debug4.png" />
+    <Content Include="readme\designs.svg" />
+    <Content Include="readme\image0.png" />
+    <Content Include="readme\image1.png" />
+    <Content Include="readme\image10.png" />
+    <Content Include="readme\image11.png" />
+    <Content Include="readme\image12.png" />
+    <Content Include="readme\image13.png" />
+    <Content Include="readme\image14.png" />
+    <Content Include="readme\image15.png" />
+    <Content Include="readme\image16.png" />
+    <Content Include="readme\image17.png" />
+    <Content Include="readme\image18.png" />
+    <Content Include="readme\image19.png" />
+    <Content Include="readme\image2.png" />
+    <Content Include="readme\image20.png" />
+    <Content Include="readme\image21.png" />
+    <Content Include="readme\image22.png" />
+    <Content Include="readme\image23.png" />
+    <Content Include="readme\image3.png" />
+    <Content Include="readme\image4.png" />
+    <Content Include="readme\image5.png" />
+    <Content Include="readme\image6.png" />
+    <Content Include="readme\image7.png" />
+    <Content Include="readme\image8.png" />
+    <Content Include="readme\image9.png" />
+    <Content Include="readme\md-styles.css" />
+    <Content Include="readme\prism.css" />
+    <Content Include="readme\prism.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Include="wwwroot\images\blazor.png" />
     <None Include="wwwroot\images\interop.png" />
     <None Include="wwwroot\images\tscircle.png" />
     <None Include="wwwroot\images\tsinterop.png" />
-    <None Include="wwwroot\readme\md-styles.css" />
-    <None Include="wwwroot\readme\prism.css" />
-    <None Include="wwwroot\readme\prism.js" />
   </ItemGroup>
 
   <ItemGroup>
