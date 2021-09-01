@@ -20,7 +20,7 @@ An implementation style walkthrough will further explain by code example availab
 For furhter information on Blazor Interop see:<br>
 [Microsoft's Blazor JavaScript interoperability](https://docs.microsoft.com/en-us/aspnet/core/blazor/JavaScript-interoperability/?view=aspnetcore-5.0).
   
-***     
+
 ## Table of Contents
 1. [Create Blazor Project](#1)<br>
 2. [Implement JavaScript Interop](#2)<br>
@@ -34,12 +34,12 @@ For furhter information on Blazor Interop see:<br>
     3. [Call Webpack TypeScript](#4.3)<br>
     4. [Call NPM TypeScript](#4.4)<br>
 5. [Interop Software Design](#5)
----
 
+##    
 ###### Document http://trog.net/readme/BlazorTSInterop 
 ###### GitHub https://github.com/warrengb/BlazorTSInterop  
 ###### Demo http://trog.net/BlazorTSInterop
----
+##    
 
 ![ScreenShot](readme/blazor.png)
 &emsp;**Blazor** is a formative addition to the .NET stack for building .NET Core SPA MVVM websites in 
@@ -57,13 +57,13 @@ Data elements and procedures can be interchanged between the two languages. Blaz
 The browser executes Wasm code one-way requiring JavaScript interop to communicate back to the browser function. Hence Blazor C# requires JavaScript interop.
 Blazor .NET libraries for the browser are JavaScript interop wrappers. For example: the Blazor version of C# WebSocket class is an interop wrapper.  
 
----
+##  
 
 <ul>
 Lets get started.
 </ul>  
 
----
+##  
 
 ## Part 1. Create Blazor Project<a name="1"></a>
 ###### To start off we will just create a new Blazor app.
@@ -85,7 +85,7 @@ Lets get started.
 
 ![ScreenShot](readme/image3.png)
 
----
+##  
 
 <ul>
 <b>Summary</b><br>
@@ -94,7 +94,7 @@ Ignore Counter and Fetch Data pages that come with the template.
 This demo will only use the home page.<br>
 </ul>  
 
----
+##  
 
 ## Part 2. Implement JavaScript Interop<a name="2"></a>
 ###### Before we get to Typescript, let's see how JavaScript interops.
@@ -324,7 +324,7 @@ script.module.js avoids cached by unique param tag.
 
 &emsp;![ScreenShot](readme/image8.png)
 
----
+##  
 
 <ul>
 <b>Summary</b><br>
@@ -332,7 +332,7 @@ Part 2 covers calling Isolated and Embedded JavaScript.<br>
 A precursor to calling TypeScript interop from Blazor.
 </ul>  
 
----
+##  
 
 ## Part 3. Debugging JavaScript<a name="3"></a>
 ###### Now is a good time to review debugging JavaScript from Visual Studio
@@ -363,7 +363,7 @@ This will trigger Visual Studio debugger re-attachment to Chrome.<br>
 If this does not work, debugging in Chrome will suffice.<br>
 ![ScreenShot](readme/debug4.png)<br>
 
----
+##  
 
 <ul>
 <b>Summary</b><br> 
@@ -371,7 +371,7 @@ Part 3 reviews debugging and debugger attachment workarounds.<br>
 It is recommended to do a debug code walkthrough to see the interop in action.
 </ul>  
 
----
+##  
 
 ## Part 4. Implement TypeScript Interop<a name="4"></a>
 ###### Let's proceed to TypeScript interop.
@@ -493,14 +493,14 @@ export var HelloInstance = new Hello();
 
 &emsp;![ScreenShot](readme/image13.png)
 
----
+##  
 
 <ul>
 <b>Summary</b><br>
 This section has demonstrated TypeScript interop using the built in Visual Studio TypeScript toolsets
 </ul>
 
----
+##  
 
 #### 2. Setup Webpack Build Pipeline</b><a name="4.2"></a><br>
 
@@ -647,14 +647,14 @@ module.exports = {
 
 &emsp;![ScreenShot](readme/image21.png)
 
----
+##  
 
 <ul>
 <b>Summary</b><br>
 This section has covered preparing a Blazor project with Webpack toolset for creating TypeScript bundles.
 </ul>
 
----
+##  
 
 #### 3. Call Webpack TypeScript</b><a name="4.3"></a><br>
 
@@ -747,7 +747,7 @@ async void ReExportHello()
 
 > ReExport Hello button demonstrates calling Hello class methods exported from 'index' library 
 
----
+##  
 
 <ul>
 <b>Summary</b><br>
@@ -756,7 +756,7 @@ A bundle can expose dependency code by export from the bundle entry module.<br>
 Bundles are embedded resources accessible by Blazor interop via the bundle library prefix.
 </ul>  
 
----
+##  
 
 ## 4. Call NPM TypeScript</b><a name="4.4"></a><br>
 
@@ -871,14 +871,14 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 >  
 &emsp;![ScreenShot](readme/image23.png)
 
----
+##  
 
 <ul>
 <b>Summary</b><br>
 This section has covered Blazor calling a TypeScript class that uses NPM three.js library.
 </ul>
 
----
+##  
 
 ## Part 4. Interop Software Design<a name="5"></a>
 ### Leveraging TypeScript benefits interop software design.<br><span style="font-weight: 100;">Typically Structural Design Patterns.</span>
