@@ -36,9 +36,9 @@ For furhter information on Blazor Interop see:<br>
 5. [Interop Software Design](#5)
 
 ##    
-###### Document http://trog.net/readme/BlazorTSInterop 
+###### Document https://trog.net/readme/BlazorTSInterop 
 ###### GitHub https://github.com/warrengb/BlazorTSInterop  
-###### Demo http://trog.net/BlazorTSInterop
+###### Demo https://trog.net/BlazorTSInterop
 ##    
 
 ![ScreenShot](readme/blazor.png)
