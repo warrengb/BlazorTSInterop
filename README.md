@@ -1,11 +1,11 @@
-# Blazor Typescript Interop
+# ***[Trog.NET](https://trog.net)*** Blazor Typescript Interop
 &emsp;![ScreenShot](readme/tsinterop.png)
 
 &emsp;&emsp;
 Blazor Typescript Interop is an elegant way to interface your 
 Blazor C# WebAssembly (Wasm) with the browsers JavaScript API and JavaScript libraries.
 Interop is neccessary because Wasm can't reach outside the browser security sandbox. 
-There is no access to the browser JavaScript API.
+As there is no direct communication between Wasm and the browser JavaScript API.
 <br>&emsp;&emsp;
 The title of this article may be mis-leading. 
 It should technically read: 'Blazer Interop with the transpiled TypeScript resulting JavaScript'.
@@ -889,4 +889,6 @@ This section has covered Blazor calling a TypeScript class that uses NPM three.j
 ###### &emsp;Blazor C# interface design aligns with TypeScript counterpart. 
 ![ScreenShot](readme/designs.svg)
 ######  &nbsp;Blazor Wasm speaks to browser through interop ready JavaScript.
+
+#  
 &copy; Copyright 2021 Warren Browne  
