@@ -34,9 +34,10 @@ Walkthrough starts off with plain old JavaScript, then progresses to TypeScript 
 5. [Interop Software Design](#5)
 
 ##    
-###### Document https://trog.net/readme/BlazorTSInterop 
+###### Home https://trog.net
+###### Document https://trog.net/Articles/BlazorTSInterop 
 ###### GitHub https://github.com/warrengb/BlazorTSInterop  
-###### Demo https://trog.net/BlazorTSInterop
+###### Demo https://trog.net/Demos/BlazorTSInterop
 ##    
 
 ![ScreenShot](readme/blazor.png)
