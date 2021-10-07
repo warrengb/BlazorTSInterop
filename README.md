@@ -37,7 +37,7 @@ Walkthrough starts off with plain old JavaScript, then progresses to TypeScript 
 ###### Home https://trog.net
 ###### Document https://trog.net/Articles/BlazorTSInterop 
 ###### GitHub https://github.com/warrengb/BlazorTSInterop  
-###### Demo https://trog.net/Demos/BlazorTSInterop
+###### Demo https://trog.net/BlazorTSInterop
 ##    
 
 ![ScreenShot](readme/blazor.png)
