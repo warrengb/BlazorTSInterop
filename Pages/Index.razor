@@ -1,7 +1,13 @@
 ﻿@page "/"
 @inject IJSRuntime JS
 @implements IAsyncDisposable
-<h1>Hello, Interop!</h1>
+<h1>Hello, BlazorTSInterop!</h1>
+<h4>
+<a href="https://trog.net">Trog.NET</a> &bull;
+<a href="https://github.com/warrengb/BlazorTSInterop">GitHub</a> &bull;
+<a href="https://trog.net/articles/BlazorTSInterop">Document</a> 
+</h4>
+<br />
 <h4 style="background-color:aliceblue; padding:20px">JavaScript Interop</h4>
 @Message<hr>
 <button class="btn btn-primary" @onclick="@Prompt">Prompt</button>
